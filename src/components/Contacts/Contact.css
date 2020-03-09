@@ -1,0 +1,38 @@
+.content-wrapper {
+    padding: 20px;
+}
+
+.img-fluid {
+    max-width: 50%;
+    height: auto;
+}
+.content-wrapper .content-heading {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    /* color: #929292; */
+    margin: -15px -15px 20px;
+    padding: 15px;
+    font-weight: 400;
+    background-color: #fafbfc;
+    border-bottom: 1px solid #cfdbe2;
+}
+
+.card {
+    margin-bottom: 1.25rem;
+}
+
+#profilePhoto {
+    /* display: inline-block ; */
+    /* width: 7px ; */
+    height: 200px ;
+    border-radius: 500px ;
+    margin: 0 0.5em ;
+    background-color: transparent ;
+    /* vertical-align: baseline ; */
+    border: solid ;
+    /* border-color: #d4af37 ;     */
+}

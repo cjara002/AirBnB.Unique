@@ -1,0 +1,108 @@
+#clientPhoto{
+    /* display: inline-block ;
+    height: 5em ; */
+    z-index: 1;
+    margin: 0 0.5em ;
+    /* background-color: transparent ; */
+    /* vertical-align: baseline ; */
+    border: solid ;
+    border-color: #d4af37 ;
+    /* position: absolute; */
+    /* bottom: 50px;
+    left: 10px; */
+}
+
+.profileP {
+    font-size: 15px;
+    color: white;
+    text-align: right;
+}
+
+.photoFloated{
+    float: left;
+    width: 150px;
+}
+
+#profileHouseContainer{
+    background-color: #202020;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.houseImage{
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+#profileHouseContainer:hover img {
+    opacity: 0.2;
+}
+
+
+.ProfileHouseDetails {
+    display: none;
+}
+
+#profileHouseContainer:hover .ProfileHouseDetails{
+    display: block;
+    font-size: 1rem;
+    color:white;
+    transition: .5s ease;
+}
+
+.houseDetialsInner{
+    height: 100%;
+    width: 100%;
+    position:absolute;
+    z-index: 1;
+    top: 15px;
+    padding: 15px 20px;
+}
+
+.profileCaption{
+    display: block;
+}
+
+#profileContainer{
+    /* vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px; */
+    align-items: center;
+    /* z-index: 1; */
+}
+
+.profileHeader{
+    /* text-align: center; */
+    font: bold;
+    /* font-size: 50px; */
+    /* padding: 10px; */
+    background-image: url("https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?cs=srgb&dl=pink-flowers-photograph-1083822.jpg&fm=jpg");
+    color: white;
+    border-bottom: 1rem;
+}
+
+.profileHeader em {
+    margin-top: 15px;
+    float: right;
+    /* width: 100px; */
+    /* height: 100px;
+    background: #555; */
+  }
+
+/* .profileHeader h1 {
+    position: relative;
+    top: 18px;
+    left: 10px;
+  } */
+
+/* #searchProfiles{
+    cursor: pointer;
+    float: center;
+} */
