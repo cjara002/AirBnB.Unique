@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/AirBnB.Unique/static/css/main.1e296fd9.chunk.css",
-    "main.js": "/AirBnB.Unique/static/js/main.44543df0.chunk.js",
-    "main.js.map": "/AirBnB.Unique/static/js/main.44543df0.chunk.js.map",
+    "main.js": "/AirBnB.Unique/static/js/main.5818ff4e.chunk.js",
+    "main.js.map": "/AirBnB.Unique/static/js/main.5818ff4e.chunk.js.map",
     "runtime-main.js": "/AirBnB.Unique/static/js/runtime-main.c853eb46.js",
     "runtime-main.js.map": "/AirBnB.Unique/static/js/runtime-main.c853eb46.js.map",
     "static/css/2.83ace7dd.chunk.css": "/AirBnB.Unique/static/css/2.83ace7dd.chunk.css",
-    "static/js/2.a6c9df40.chunk.js": "/AirBnB.Unique/static/js/2.a6c9df40.chunk.js",
-    "static/js/2.a6c9df40.chunk.js.map": "/AirBnB.Unique/static/js/2.a6c9df40.chunk.js.map",
+    "static/js/2.cb35a4a0.chunk.js": "/AirBnB.Unique/static/js/2.cb35a4a0.chunk.js",
+    "static/js/2.cb35a4a0.chunk.js.map": "/AirBnB.Unique/static/js/2.cb35a4a0.chunk.js.map",
     "index.html": "/AirBnB.Unique/index.html",
-    "precache-manifest.f6b20fa08532558e70a5b3878088c794.js": "/AirBnB.Unique/precache-manifest.f6b20fa08532558e70a5b3878088c794.js",
+    "precache-manifest.3b3c9d4057ec4e48c337898b028691ba.js": "/AirBnB.Unique/precache-manifest.3b3c9d4057ec4e48c337898b028691ba.js",
     "service-worker.js": "/AirBnB.Unique/service-worker.js",
     "static/css/2.83ace7dd.chunk.css.map": "/AirBnB.Unique/static/css/2.83ace7dd.chunk.css.map",
     "static/css/main.1e296fd9.chunk.css.map": "/AirBnB.Unique/static/css/main.1e296fd9.chunk.css.map"
@@ -17,8 +17,8 @@
   "entrypoints": [
     "static/js/runtime-main.c853eb46.js",
     "static/css/2.83ace7dd.chunk.css",
-    "static/js/2.a6c9df40.chunk.js",
+    "static/js/2.cb35a4a0.chunk.js",
     "static/css/main.1e296fd9.chunk.css",
-    "static/js/main.44543df0.chunk.js"
+    "static/js/main.5818ff4e.chunk.js"
   ]
 }
