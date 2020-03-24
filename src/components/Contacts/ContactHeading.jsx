@@ -26,6 +26,7 @@ class ContactHeading extends React.Component {
               data-toggle="tooltip"
               title="Search Cleaners"
             ></em>
+            {" "}
             <em
               className="fa-1x mr-2 fas fa-user-plus"
               onClick={this.AddCleaner}

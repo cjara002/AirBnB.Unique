@@ -13,12 +13,46 @@
     align-items: center;
     font-size: 1.5rem;
     line-height: 1.1;
-    /* color: #929292; */
+    color: #EAA220;
     margin: -15px -15px 20px;
     padding: 15px;
-    font-weight: 400;
-    background-color: #fafbfc;
-    border-bottom: 1px solid #cfdbe2;
+    /* font-weight: 400; */
+    background-color: #1B842C;
+    /* border-bottom: 1px solid #cfdbe2; */
+}
+
+#contactCard {
+background-color: #1B842C; 
+/* color: #EAA220;    */
+}
+#contactCard h4{
+/* background-color: #1B842C;  */
+color: #EAA220;   
+}
+#contactCard h5,span{
+/* background-color: #1B842C;  */
+color: white;   
+}
+
+#contactMenu{
+background-color: #1B842C; 
+}
+
+#menuShortcut{
+    /* color: #1B842C;  */
+    background-color: #EAA220;   
+}
+
+#toggleButton{
+    color: #1B842C; 
+}
+
+#subMenu{
+    background-color: #145f20;
+    color: #EAA220;
+}
+#subMenuIcon em + span{
+    color: #1B842C;
 }
 
 .card {
@@ -34,5 +68,6 @@
     background-color: transparent ;
     /* vertical-align: baseline ; */
     border: solid ;
+    border-color: #EAA220;
     /* border-color: #d4af37 ;     */
 }

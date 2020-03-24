@@ -20,8 +20,8 @@ class ContactCleaners extends React.Component {
         {this.props &&
           this.props.cleaners.map(profile => (
            <div className="col-sm-6 col-lg-4" key={profile.id}>
-              <div className="card-default card">
-                <div className="ml-auto">
+              <div className="card-default card" id="contactMenu">
+                <div className="ml-auto" id="menuShortcut">
                   <div className="dropdown">
                     <button
                       type="button"
@@ -31,7 +31,7 @@ class ContactCleaners extends React.Component {
                       onClick={this.showMenu}
                       // onClick={this.activeMenu}
                     >
-                      <em className="fa fa-ellipsis-h fa-lg" />
+                      <em className="fa fa-ellipsis-h fa-lg" id="toggleButton"/>
                     </button>
                     <div
                       tabIndex={-1}
@@ -51,11 +51,12 @@ class ContactCleaners extends React.Component {
                         transform: "translate3d(-106px, 31px, 0px)"
                       }}
                       data-placement="bottom-start"
+                      id="subMenu"
                     >
                       <button
                         type="button"
                         tabIndex={0}
-                        className="dropdown-item"
+                        className="dropdown-item" id="subMenuIcon"
                       >
                         <em className="fa-fw fa fa-plus mr-2" />
                         <span>Edit contact</span>
@@ -74,7 +75,7 @@ class ContactCleaners extends React.Component {
                       <button
                         type="button"
                         tabIndex={0}
-                        className="dropdown-item"
+                        className="dropdown-item" id="subMenuIcon"
                       >
                         <em className="fa-fw fas fa-minus mr-2" />
                         <span>Delete contact</span>
@@ -82,7 +83,7 @@ class ContactCleaners extends React.Component {
                       <button
                         type="button"
                         tabIndex={0}
-                        className="dropdown-item"
+                        className="dropdown-item" id="subMenuIcon"
                       >
                         <em className="fa-fw fas fa-share mr-2" />
                         <span>Share contact</span>
@@ -95,7 +96,7 @@ class ContactCleaners extends React.Component {
 
                 {/* Start of Card */}
 
-                <div className="text-center card-body">
+                <div className="text-center card-body" id="contactCard">
                   <img
                     className=" mb-2 rounded-circle-thumb32"
                     src={profile.userImage}
@@ -103,7 +104,7 @@ class ContactCleaners extends React.Component {
                     id="profilePhoto"
                   />
                   <h4>{profile.name}</h4>
-                  <h5 className="text-muted">{profile.City}</h5>
+                  <h5> City: {profile.City}</h5>
                   {/* <p>{profile.Description}</p> */}
                   <span>Years in operation: {profile.yearsInOperation}</span>
                 </div>

@@ -46,9 +46,7 @@ class Contact extends React.Component {
       <React.Fragment>
         <div className="content-wrapper">
           <ContactHeading />
-          {/* <div className="row"> */}
             <ContactCleaners />
-          {/* </div> */}
         </div>
       </React.Fragment>
     );
