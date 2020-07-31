@@ -3,10 +3,18 @@ import ContactForm from "./ContactForm";
 
 class ContactHeading extends React.Component {
   state = {
-    modal: false
+    modal: false,
+    isEditing: false
   };
 
-  AddCleaner = () => {
+  toggle = () => {
+    this.setState((prevState) => ({
+      isEditing: !prevState.isEditing,
+      modal: !prevState.modal,
+    }));
+  };
+
+  toggleAddCleaner = () => {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
@@ -29,14 +37,19 @@ class ContactHeading extends React.Component {
             {" "}
             <em
               className="fa-1x mr-2 fas fa-user-plus"
-              onClick={this.AddCleaner}
+              onClick={this.toggleAddCleaner}
               style={{ cursor: "pointer" }}
               data-toggle="tooltip"
               title="Add Cleaner"
             ></em>
           </div>
         </div>
-        < ContactForm  isModal={this.state.modal} />
+        < ContactForm  
+        isModal={this.state.modal}
+        toggle={this.toggle}
+        toggleAddCleaner={this.toggleAddCleaner}
+        isEditing={this.state.isEditing}
+         />
       </React.Fragment>
     );
   }

@@ -99,13 +99,13 @@ class ContactCleaners extends React.Component {
                 <div className="text-center card-body" id="contactCard">
                   <img
                     className=" mb-2 rounded-circle-thumb32"
-                    src={profile.userImage}
+                    src={profile.imageUrl}
                     alt="Contact"
                     id="profilePhoto"
                   />
                   <h4>{profile.name}</h4>
-                  <h5> City: {profile.City}</h5>
-                  {/* <p>{profile.Description}</p> */}
+                  <h5> City: {profile.city}</h5>
+                  <p>{profile.description}</p>
                   <span>Years in operation: {profile.yearsInOperation}</span>
                 </div>
                 <div className="d-flex card-footer">
@@ -128,7 +128,7 @@ class ContactCleaners extends React.Component {
 
 function mapStateToPros(store) {
   return {
-    cleaners: store.profiles
+    cleaners: store.cleaners
   };
 }
 

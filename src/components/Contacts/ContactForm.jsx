@@ -20,33 +20,72 @@ class ContactForm extends React.Component {
       <React.Fragment>
         <Modal isOpen={this.props.isModal}>
           <ModalHeader
-            // toggle={
-            //   this.props.isEditing
-            //     ? this.props.toggle
-            //     : this.props.toggleAddQuestion
-            // }
+            toggle={
+              this.props.isEditing
+                ? this.props.toggle
+                : this.props.toggleAddCleaner
+            }
           >
-            {/* <div> {this.props.isEditing ? "Update Task" : "Add New Task"}</div> */}
-            <div> New Contact </div>
+            <div> {this.props.isEditing ? "Update Cleaner" : "Add New Cleaner"} </div>
           </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label>First Name</Label>
+                <Label>Name</Label>
                 <Input
                   type="text"
-                  name="task"
-                  value={this.state.firstName}
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.changeHandler}
+                ></Input>
+              </FormGroup>
+
+              {/* <FormGroup>
+                <Label>Last Name</Label>
+                <Input
+                  type="text"
+                  name="lastName"
+                  value={this.state.lastName}
+                  onChange={this.changeHandler}
+                ></Input>
+              </FormGroup> */}
+
+              <FormGroup>
+                <Label>Years in operation</Label>
+                <Input
+                  type="text"
+                  name="yearsinoperation"
+                  value={this.state.yearsInOperation}
                   onChange={this.changeHandler}
                 ></Input>
               </FormGroup>
 
               <FormGroup>
-                <Label>Last Name</Label>
+                <Label>Photo of cleaner</Label>
+                <Input
+                  type="url"
+                  name="imageUrl"
+                  value={this.state.imageUrl}
+                  onChange={this.changeHandler}
+                ></Input>
+              </FormGroup>
+
+              <FormGroup>
+                <Label>City</Label>
                 <Input
                   type="text"
-                  name="task"
-                  value={this.state.firstName}
+                  name="city"
+                  value={this.state.city}
+                  onChange={this.changeHandler}
+                ></Input>
+              </FormGroup>
+
+              <FormGroup>
+                <Label>Description for your service</Label>
+                <Input
+                  type="text"
+                  name="city"
+                  value={this.state.description}
                   onChange={this.changeHandler}
                 ></Input>
               </FormGroup>
@@ -69,16 +108,17 @@ class ContactForm extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.handleSubmit}>
-              {/* {this.props.isEditing ? "Update" : "Add"} */}
-            Add
+              {this.props.isEditing ? "Update" : "Add"}
+            {/* Add */}
             </Button>{" "}
+            {/* Might be able to take out the cancel button */}
             <Button
               color="secondary"
-              // onClick={
-              //   this.props.isEditing
-              //     ? this.props.toggle
-              //     : this.props.toggleAddQuestion
-              // }
+              onClick={
+                this.props.isEditing
+                  ? this.props.toggle
+                  : this.props.toggleAddCleaner
+              }
             >
               Cancel
             </Button>

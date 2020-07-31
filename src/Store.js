@@ -1,73 +1,91 @@
-import { createStore } from "redux";
+// import { combineReducers, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
+import axios from "axios";
+// import logger from "redux-logger";
+import thunk from "redux-thunk";
 
-function reducer(store, action) {
-  if (!store) {
-    return {
-      profiles: [
-        {
-          id: 1,
-          name: "Ofelia Hernandez",
-          yearsInOperation: 1,
-          HouseType: "House",
-          Description:
-            "Provide eco-friendly solutions to your cleaning problems.",
-          City: "Long Beach",
-          userImage:
-            "https://images.pexels.com/photos/1239288/pexels-photo-1239288.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-          houseImage:
-            "https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        },
-        {
-          id: 2,
-          name: "Anita Smith",
-          yearsInOperation: 8,
-          HouseType: "House",
-          Description: "Fast and reliant service all year long.",
-          City: "Downey",
-          userImage:
-            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-          houseImage:
-            "https://images.pexels.com/photos/139115/pexels-photo-139115.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500 no-repeat"
-        },
-        {
-          id: 3,
-          name: "Harry Max",
-          yearsInOperation: 2,
-          HouseType: "Apartment",
-          Description: "I am ok at cleaing.",
-          City: "Cerritos",
-          userImage:
-            "https://upload.wikimedia.org/wikipedia/commons/4/48/Outdoors-man-portrait_%28cropped%29.jpg",
-          houseImage:
-            "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 no-repeat"
-        },
-        {
-          id: 4,
-          name: "Jo Kondo",
-          yearsInOperation: 2,
-          HouseType: "Apartment",
-          Description: "Let me help you become a super star host.",
-          City: "Torrance",
-          userImage:
-            "https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-          houseImage:
-            "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 no-repeat"
-        },
-        {
-          id: 5,
-          name: "Red Dragon",
-          yearsInOperation: 2,
-          HouseType: "Apartment",
-          Description: "Will leave your place smoking clean.",
-          City: "Torrance",
-          userImage:
-            "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-          houseImage:
-            "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 no-repeat"
-        }
-      ]
-    };
+const logger = (Store) => (next) => (action) => {
+  console.log("action fired", action);
+  next(action);
+}
+
+const error = (Store) => (next) => (action) => {
+  try {
+    next(action);
+  } catch (e) {
+    console.log("action not completed", e)
   }
 }
 
-export default createStore(reducer);
+// const middleware = applyMiddleware(logger, error);
+const middleware = applyMiddleware(thunk, logger, error);
+
+// const profileReducer = (state={}, action) => {
+//   switch(action.type) {
+//     case "LOAD_PROFILES": {
+//     state = {...state, profile: action.payload}
+//     break;
+//     }
+//      default:{
+//       break;
+//     }
+//   }
+//   return state;
+// }
+
+// const  reducers = combineReducers({ 
+//   profile: profileReducer
+// })
+
+const intialState= {
+fetching: false, 
+fetched: false, 
+cleaners: [],
+error: null,
+}
+
+const  reducer = (state = intialState, action) => {
+  switch(action.type) {
+        case "FETCH_CLEANERS_START": {
+        return {...state, fetching: true }
+
+        }
+        case "FETCH_CLEANERS_ERROR": {
+        return {...state, fetching: false, error: action.payload}
+
+        }
+        case "RECEIVE_CLEANERS": {
+        state = {...state, fetching: true, fetched: true, cleaners: action.payload}
+        break;
+        }
+         default:{
+          break;
+        }
+      }
+      return state;
+} 
+   
+// const Store = createStore(reducers);
+
+const Store = createStore(reducer, middleware);
+
+// Store.subscribe(() => {
+//   console.log("store changed", Store.getState())
+// })
+
+// Store.dispatch({type: "LOAD_PROFILES", payload: ""})
+Store.dispatch((dispatch) => {
+  dispatch({type: "FETCH_CLEANERS_START"})
+  // axios.get("process.env.REACT_APP_API_HOST_PREFIX/api/profile") gave me 404
+  // axios.get("/api/profile")
+  // axios.get("https://localhost:3000/api/profile")
+  axios.get("https://localhost:5001/api/cleaners")
+  .then((response) => {
+    dispatch({ type: "RECEIVE_CLEANERS", payload: response.data})
+  })
+  .catch((error) => {
+    dispatch({type: "FETCH_CLEANERS_ERROR", payload: error})
+  })
+})
+
+export default Store;
