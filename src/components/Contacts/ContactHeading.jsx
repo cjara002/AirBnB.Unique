@@ -4,9 +4,19 @@ import ContactForm from "./ContactForm";
 class ContactHeading extends React.Component {
   state = {
     modal: false,
-    isEditing: false
+    isEditing: false,
+    // form: {
+    //   name: "",
+    //   yearsInOperation: "",
+    //   imageURL: "",
+    //   city: "",
+    //   description: ""
+    // }
   };
 
+  // handleSubmit = values => {
+  //   console.log("handleSubmit:", this.state)
+  // }
   toggle = () => {
     this.setState((prevState) => ({
       isEditing: !prevState.isEditing,
@@ -45,10 +55,12 @@ class ContactHeading extends React.Component {
           </div>
         </div>
         < ContactForm  
+        // form={this.state.form}
+        // submit={this.handleSubmit}
+        isEditing={this.state.isEditing}
         isModal={this.state.modal}
         toggle={this.toggle}
         toggleAddCleaner={this.toggleAddCleaner}
-        isEditing={this.state.isEditing}
          />
       </React.Fragment>
     );

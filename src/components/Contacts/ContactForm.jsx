@@ -9,121 +9,163 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
 } from "reactstrap";
+import { Formik, Field } from "formik";
+import ContactFormSchema from "./ContactFormSchema";
 
 class ContactForm extends React.Component {
-  state = {};
+  state = {
+    formData: {
+      name: "",
+      yearsInOperation: "",
+      imageUrl: "",
+      city: "",
+      description: "",
+    },
+  };
+
+  //need handle submit function
+  handleSubmit = values => {
+    console.log("handleSubmit:", this.state.form)
+  }
 
   render() {
     return (
       <React.Fragment>
-        <Modal isOpen={this.props.isModal}>
-          <ModalHeader
-            toggle={
-              this.props.isEditing
-                ? this.props.toggle
-                : this.props.toggleAddCleaner
-            }
-          >
-            <div> {this.props.isEditing ? "Update Cleaner" : "Add New Cleaner"} </div>
-          </ModalHeader>
-          <ModalBody>
-            <Form>
-              <FormGroup>
-                <Label>Name</Label>
-                <Input
-                  type="text"
-                  name="name"
-                  value={this.state.name}
-                  onChange={this.changeHandler}
-                ></Input>
-              </FormGroup>
+        <Formik
+          enableReinitialize={true}
+          validationSchema={ContactFormSchema}
+          initialValues={this.state.formData}
+          onSubmit={this.handleSubmit}
+        >
+          {(props) => {
+            const {
+              values,
+              touched,
+              errors,
+              handleSubmit,
+              isValid,
+              isSubmitting,
+            } = props;
 
-              {/* <FormGroup>
-                <Label>Last Name</Label>
-                <Input
-                  type="text"
-                  name="lastName"
-                  value={this.state.lastName}
-                  onChange={this.changeHandler}
-                ></Input>
-              </FormGroup> */}
-
-              <FormGroup>
-                <Label>Years in operation</Label>
-                <Input
-                  type="text"
-                  name="yearsinoperation"
-                  value={this.state.yearsInOperation}
-                  onChange={this.changeHandler}
-                ></Input>
-              </FormGroup>
-
-              <FormGroup>
-                <Label>Photo of cleaner</Label>
-                <Input
-                  type="url"
-                  name="imageUrl"
-                  value={this.state.imageUrl}
-                  onChange={this.changeHandler}
-                ></Input>
-              </FormGroup>
-
-              <FormGroup>
-                <Label>City</Label>
-                <Input
-                  type="text"
-                  name="city"
-                  value={this.state.city}
-                  onChange={this.changeHandler}
-                ></Input>
-              </FormGroup>
-
-              <FormGroup>
-                <Label>Description for your service</Label>
-                <Input
-                  type="text"
-                  name="city"
-                  value={this.state.description}
-                  onChange={this.changeHandler}
-                ></Input>
-              </FormGroup>
-
-              {/* <FormGroup>
-                <Label>Priority</Label>
-                <Input
-                  type="select"
-                  name="priority"
-                  value={this.state.priority}
-                  onChange={this.changeHandler}
+            return (
+              <Modal isOpen={this.props.isModal}>
+                <ModalHeader
+                  toggle={
+                    this.props.isEditing
+                      ? this.props.toggle
+                      : this.props.toggleAddCleaner
+                  }
+                
                 >
-                  <option>----</option>
-                  <option>High</option>
-                  <option>Medium</option>
-                  <option>Low</option>
-                </Input>
-              </FormGroup> */}
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.handleSubmit}>
-              {this.props.isEditing ? "Update" : "Add"}
-            {/* Add */}
-            </Button>{" "}
-            {/* Might be able to take out the cancel button */}
-            <Button
-              color="secondary"
-              onClick={
-                this.props.isEditing
-                  ? this.props.toggle
-                  : this.props.toggleAddCleaner
-              }
-            >
-              Cancel
-            </Button>
-          </ModalFooter>
-        </Modal>
+                  <div>
+                    {" "}
+                    {this.props.isEditing
+                      ? "Update Cleaner"
+                      : "Add New Cleaner"}{" "}
+                  </div>
+                </ModalHeader>
+                <ModalBody>
+                  <Form onSubmit={handleSubmit}>
+                    <FormGroup>
+                      <Label>Name</Label>
+                      <Field
+                        type="text"
+                        name="name"
+                        value={values.name}
+                        placeholder="please enter a name..."
+                      />
+                        
+                      {errors.name && touched.name && (
+                        <span className="input-feedback text-danger">
+                          {errors.name}
+                        </span>
+                      )}
+                    </FormGroup>
+
+                    <FormGroup>
+                      <Label>Years In Operation</Label>
+                      <Field
+                        type="number"
+                        name="yearsInOperation"
+                        value={values.yearsInOperation}
+                        placeholder="Put 0 is you have less than 1 year..."
+                      />
+                      {errors.yearsInOperation && touched.yearsInOperation && (
+                        <span className="input-feedback text-danger">
+                          {errors.yearsInOperation}
+                        </span>
+                      )}
+                    </FormGroup>
+
+                    <FormGroup>
+                      <Label>Profile Photo</Label>
+                      <Field
+                        type="text"
+                        name="imageURL"
+                        value={values.imageURL}
+                        placeholder="Please use a good photo..."
+                      />
+                      {errors.imageURL && touched.imageURL && (
+                        <span className="input-feedback text-danger">
+                          {errors.imageURL}
+                        </span>
+                      )}
+                    </FormGroup>
+
+                    <FormGroup>
+                      <Label>City</Label>
+                      <Field
+                        type="text"
+                        name="city"
+                        value={values.city}
+                        placeholder="full city name..."
+                      />
+                      {errors.city && touched.city && (
+                        <span className="input-feedback text-danger">
+                          {errors.city}
+                        </span>
+                      )}
+                    </FormGroup>
+
+                    <FormGroup>
+                      <Label>Description</Label>
+                      <Field
+                        type="text"
+                        name="description"
+                        value={values.description}
+                        placeholder="What services do you provide?"
+                      />
+                      {errors.description && touched.description && (
+                        <span className="input-feedback text-danger">
+                          {errors.description}
+                        </span>
+                      )}
+                    </FormGroup>
+                  </Form>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="primary" type="submit" disabled={!isValid || isSubmitting}>
+                  {/* <Button color="primary" type="submit" > */}
+                    {this.props.isEditing ? "Update" : "Add"}
+                    {/* Add */}
+                  </Button>{" "}
+                  {/* Might be able to take out the cancel button */}
+                  <Button
+                    color="secondary"
+                    onClick={
+                      this.props.isEditing
+                        ? this.props.toggle
+                        : this.props.toggleAddCleaner
+                    }
+                  >
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            );
+          }}
+        </Formik>
       </React.Fragment>
     );
   }

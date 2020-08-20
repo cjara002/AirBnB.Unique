@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Contact.css";
+import "./ContactStyles.css";
 // import ProfileContact from "./ProfileContact";
 import ContactHeading from "./ContactHeading";
 import ContactCleaners from "./ContactCleaners";

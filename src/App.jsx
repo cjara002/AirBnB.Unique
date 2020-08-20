@@ -1,22 +1,19 @@
 import React from "react";
-// import Profiles from "./components/Profile/Profiles.jsx.js.js.js";
-import Contact from "./components/Contacts/Contact";
+import { withRouter } from "react-router-dom";
+import AppRoutes from "./start/AppRoutes";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./Store";
 
 class App extends React.Component {
-  state = {};
 
   render() {
+    console.log("Starting App from App.jsx");
     return (
       <React.Fragment>
         <Provider store={store}>
           <div className="App">
-            {/* <header className="App-header"> */}
-            {/* <Profiles /> */}
-            <Contact />
-            {/* </header> */}
+          <AppRoutes />
           </div>
         </Provider>
       </React.Fragment>
@@ -24,4 +21,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
