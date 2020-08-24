@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import UniqueTest from "./images/UniqueLogoTest.jpg";
 // import {
 //   UncontrolledDropDown,
 //   DropdownMenu,
@@ -20,10 +21,11 @@ class Header extends Component {
           <div className="navbar-brand">
             <span>
               {/* do on click */}
-              <div className="brand-logo text-white">
+              <div className="brand-logo text-black">
                 <img
+                style={{"width": "10%", "border-radius": "50%"}}
                   className="img-fluid"
-                  // src={ImperioTransXS}
+                  src={UniqueTest}
                   alt="App Logo"
                 />
                 <small className="ml-2"> Making every expierence UNIQUE</small>

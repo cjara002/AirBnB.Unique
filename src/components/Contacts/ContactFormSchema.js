@@ -6,9 +6,9 @@ const ContactFormSchema = Yup.object().shape({
     .max(50,"Your name cannot be over 50 characters.")
     .required("Name is required."),
 
-    yearsInOperation: Yup.string().required("Number of years is required."),
+    yearsinoperation: Yup.string().required("Number of years is required."),
 
-    imageURl: Yup.string()
+    imageurl: Yup.string()
     .min(1, "The link is too short." )
     .max(50, "The image URL should be less than 50 charcters.")
     .required("A photo is required."),

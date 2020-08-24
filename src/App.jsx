@@ -12,9 +12,9 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Provider store={store}>
-          <div className="App">
+          {/* <div className="App"> */}
           <AppRoutes />
-          </div>
+          {/* </div> */}
         </Provider>
       </React.Fragment>
     );
