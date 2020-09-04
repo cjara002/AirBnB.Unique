@@ -8,6 +8,7 @@ import ContactCleaners from "./ContactCleaners";
 class Contact extends React.Component {
   state = {
     imageLoaded: false,
+   
   };
 
   render() {

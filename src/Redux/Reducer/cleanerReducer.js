@@ -2,10 +2,12 @@ const intialState = {
   fetching: false,
   fetched: false,
   cleaners: [],
+  singleCleaner: [],
   error: null,
 };
 
 const cleanerReducer = (state = intialState, action) => {
+  // debugger;
   switch (action.type) {
     case "FETCH_CLEANERS_START": {
       return { ...state, fetching: true };
@@ -33,6 +35,19 @@ const cleanerReducer = (state = intialState, action) => {
       break;
     }
     case "ADD_CLEANERS_ERROR": {
+        return { ...state, fetching: false, error: action.payload };
+      }
+    case "GET_SINGLE_CLEANER": {
+        const singleCleaner = action.payload
+      state = {
+        ...state,
+        fetching: true,
+        fetched: true,
+        singleCleaner
+      };
+      break;
+    }
+    case "GET_SINGLE_CLEANER_ERROR": {
         return { ...state, fetching: false, error: action.payload };
       }
     default: {

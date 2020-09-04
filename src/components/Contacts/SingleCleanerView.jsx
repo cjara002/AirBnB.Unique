@@ -1,48 +1,39 @@
 import React from "react";
-import { connect } from "react-redux";
-import { getCleaners, GetSingleCleaner } from "../../Redux/Actions/Cleaners/cleanerAction";
-import SingleCleanerView from "./SingleCleanerView";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+} from "reactstrap";
+// import { connect } from "react-redux";
+// import { GetSingleCleaner } from "../../Redux/Actions/Cleaners/cleanerAction";
 
-class ContactCleaners extends React.Component {
-
-  componentDidMount() {
-    this.props.getCleaners();
-  }
-
+class SingleCleanerView extends React.Component {
   state = {
-    modal: false,
+    optionsOpen: false,
   };
 
-  showModal = profile => {
-    this.props.GetSingleCleaner(profile);
-  var single = this.props.singleCleaner
-  this.setState(
-    prevState => {
-      return {
-    modal: !prevState.modal,
-    singleCleaner: single
+    showMenu = () => {
+    this.setState((prevState) => ({
+      optionsOpen: !prevState.optionsOpen,
+    }));
   };
-},
-console.log("showModal:", this.state.singleCleaner)
-);
-};
-
-toggle = () => {
-  this.setState((prevState) => ({
-    modal: !prevState.modal,
-  }));
-};
-
   render() {
     return (
       <React.Fragment>
-        <div className="row">
-          {this.props &&
-            this.props.cleaners.map((profile) => (
-              <div className="col-sm-6 col-lg-4" key={profile.id}>
-                <div className="card-default card" id="contactMenu">
-                  {/*
-                  <div className="ml-auto" id="menuShortcut">
+
+              <Modal isOpen={this.props.isModal}>
+                <ModalHeader
+                  toggle={this.props.toggle}
+
+                >
+                  <div>
+                  {this.props.single[0] && this.props.single[0].name}
+                  </div>
+                </ModalHeader>
+                <ModalBody>
+                  {/* Start of menu */}
+                <div className="ml-auto" id="menuShortcut">
                     <div className="dropdown">
                       <button
                         type="button"
@@ -50,7 +41,6 @@ toggle = () => {
                         aria-expanded="false"
                         className="btn btn-outline-secondary"
                         onClick={this.showMenu}
-                        // onClick={this.activeMenu}
                       >
                         <em
                           className="fa fa-ellipsis-h fa-lg"
@@ -87,7 +77,7 @@ toggle = () => {
                           <span>Edit contact</span>
                         </button>
 
-                        {/* <button
+                         {/* <button
                         type="button"
                         tabIndex={0}
                         className="dropdown-item"
@@ -95,7 +85,7 @@ toggle = () => {
                       >
                         <em className="fa-fw fa fa-plus mr-2" />
                         <span>New contact</span>
-                      </button> 
+                      </button>  */}
 
                         <button
                           type="button"
@@ -118,51 +108,28 @@ toggle = () => {
                       </div>
                     </div>
                   </div>
-
-                  {/* End of Menu */}
-
-                  {/* Start of Card */}
-
-                  <div className="text-center card-body" id="contactCard">
-                    <img
+                        {/* End of menu */}
+                <img
                       className=" mb-2 rounded-circle-thumb32"
-                      src={profile.imageUrl}
+                      src={this.props.single[0] && this.props.single[0].imageUrl}
                       alt="Contact"
                       id="profilePhoto"
                     />
-                    <h4>{profile.name}</h4>
-                    <h5> City: {profile.city}</h5>
-                    {/* <p>{profile.description}</p>
-                    <span>Years in operation: {profile.yearsInOperation}</span> */}
-                  </div>
-                  <div className="d-flex card-footer">
-                    <button
-                      type="button"
-                      className="btn btn-outline-dark btn-lg btn-block"
-                      onClick={() => this.showModal(profile.id)}
-                    >
-                      View Contact
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-            <SingleCleanerView  
-            single={this.props.singleCleaner}
-            isModal={this.state.modal}
-            toggle={this.toggle}
-            />
-        </div>
+                    {/* <h4>{profile.name}</h4> */}
+                    <h5> City: {this.props.single[0] && this.props.single[0].city}</h5>
+                   <p>{this.props.single[0] && this.props.single[0].description}</p>
+                    <span>Years in operation: {this.props.single[0] && this.props.single[0].yearsInOperation}</span> 
+                </ModalBody>
+              </Modal>
       </React.Fragment>
     );
   }
 }
 
-function mapStateToPros(store) {
-  return {
-    cleaners: store.cleaners,
-    singleCleaner: store.singleCleaner
-  };
-}
-
-export default connect(mapStateToPros, { getCleaners, GetSingleCleaner })(ContactCleaners);
+// function mapStateToProps(store) {
+//   return {
+//     singleCleaner: store.singleCleaner
+//   }
+// }
+// export default connect(mapStateToProps, { GetSingleCleaner })(SingleCleanerView);
+export default SingleCleanerView;

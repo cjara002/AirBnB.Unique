@@ -38,3 +38,22 @@ export const addCleaner = (user) => {
       });
   };
 };
+
+export const GetSingleCleaner = (id) => {
+  return (dispatch) => {
+    axios
+      .get(`https://localhost:5001/api/cleaners/${id}` )
+      .then((response) => {
+        dispatch({
+          type: "GET_SINGLE_CLEANER",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "GET_SINGLE_CLEANER_ERROR",
+          payload: error,
+        });
+      });
+  };
+};
