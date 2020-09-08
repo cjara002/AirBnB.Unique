@@ -5,6 +5,7 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
+import "./ContactStyles.css";
 // import { connect } from "react-redux";
 // import { GetSingleCleaner } from "../../Redux/Actions/Cleaners/cleanerAction";
 
@@ -18,6 +19,9 @@ class SingleCleanerView extends React.Component {
       optionsOpen: !prevState.optionsOpen,
     }));
   };
+
+
+
   render() {
     return (
       <React.Fragment>
@@ -72,9 +76,14 @@ class SingleCleanerView extends React.Component {
                           tabIndex={0}
                           className="dropdown-item"
                           id="subMenuIcon"
+                          onClick={() => this.props.updateContact(this.props.single[0].id)}
                         >
                           <em className="fa-fw fa fa-plus mr-2" />
-                          <span>Edit contact</span>
+                          <span
+                         
+                    // onClick={() => props.onUpdate(props.busProfile.id)}
+
+                          >Edit contact</span>
                         </button>
 
                          {/* <button
@@ -92,11 +101,12 @@ class SingleCleanerView extends React.Component {
                           tabIndex={0}
                           className="dropdown-item"
                           id="subMenuIcon"
+                          onClick={() => this.props.deleteContact(this.props.single[0].id)}
                         >
                           <em className="fa-fw fas fa-minus mr-2" />
                           <span>Delete contact</span>
                         </button>
-                        <button
+                        {/* <button
                           type="button"
                           tabIndex={0}
                           className="dropdown-item"
@@ -104,21 +114,25 @@ class SingleCleanerView extends React.Component {
                         >
                           <em className="fa-fw fas fa-share mr-2" />
                           <span>Share contact</span>
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>
                         {/* End of menu */}
-                <img
-                      className=" mb-2 rounded-circle-thumb32"
-                      src={this.props.single[0] && this.props.single[0].imageUrl}
-                      alt="Contact"
-                      id="profilePhoto"
-                    />
-                    {/* <h4>{profile.name}</h4> */}
-                    <h5> City: {this.props.single[0] && this.props.single[0].city}</h5>
-                   <p>{this.props.single[0] && this.props.single[0].description}</p>
-                    <span>Years in operation: {this.props.single[0] && this.props.single[0].yearsInOperation}</span> 
+                <div className="container">
+                  <div className="verticalCenter">
+                  <img
+                        className=" mb-2 rounded-circle-thumb32"
+                        src={this.props.single[0] && this.props.single[0].imageUrl}
+                        alt="Contact"
+                        id="profilePhoto"
+                      />
+                      {/* <h4>{profile.name}</h4> */}
+                      <h5> City: {this.props.single[0] && this.props.single[0].city}</h5>
+                     <p>{this.props.single[0] && this.props.single[0].description}</p>
+                      <span>Years in operation: {this.props.single[0] && this.props.single[0].yearsInOperation}</span> 
+                      </div>
+                </div>
                 </ModalBody>
               </Modal>
       </React.Fragment>

@@ -11,6 +11,11 @@ const cleanerRoutes = [
         path: "/cleanersform",
         component: lazy(() => import("../components/Contacts/ContactFormPage"))
     },
+    {
+        exact: true,
+        path: "/cleanersform/:id/edit",
+        component: lazy(() => import("../components/Contacts/ContactFormPage"))
+    },
 ];
 
 export default cleanerRoutes;

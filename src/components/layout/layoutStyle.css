@@ -1,0 +1,12 @@
+.navbar-nav {
+    display: inline-block !important;
+    padding-left: 60% !important;
+}
+
+#appHeader {
+    background-color: hsl(0, 0%, 0%, .7);
+}
+
+.section-container{
+    background-color: #A2E4B8;
+}

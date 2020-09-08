@@ -17,12 +17,12 @@
     margin: -15px -15px 20px;
     padding: 15px;
     /* font-weight: 400; */
-    background-color: #1B842C;
+    background-color: #133a26;
     /* border-bottom: 1px solid #cfdbe2; */
 }
 
 #contactCard {
-background-color: #1B842C; 
+background-color: #133a26; 
 /* color: #EAA220;    */
 }
 #contactCard h4{
@@ -35,14 +35,15 @@ color: white;
 }
 */
 #contactMenu{
-background-color: #1B842C; 
+background-color: #133a26; 
 }
 
+/* 
 #menuShortcut{
-    /* color: #1B842C;  */
+    color: #1B842C;  
     background-color: #EAA220;   
 }
-
+*/
 #toggleButton{
     color: #1B842C; 
 }
@@ -71,3 +72,27 @@ background-color: #1B842C;
     border-color: #EAA220;
     /* border-color: #d4af37 ;     */
 }
+
+/* #menuDetials{
+    align-content: center;
+    position: relative;
+} */
+
+.container {
+    height: 300px;
+    position: relative;
+    /* border: 3px solid green; */
+}
+
+.verticalCenter {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* .content-heading {
+    border-radius: 5%;
+} */

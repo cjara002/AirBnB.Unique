@@ -16,7 +16,7 @@ class Contact extends React.Component {
       <React.Fragment>
         <div className="content-wrapper">
           <ContactHeading history={this.props.history}/>
-            <ContactCleaners />
+            <ContactCleaners history={this.props.history}/>
         </div>
       </React.Fragment>
     );

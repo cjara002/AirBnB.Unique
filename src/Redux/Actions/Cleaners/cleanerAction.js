@@ -40,6 +40,7 @@ export const addCleaner = (user) => {
 };
 
 export const GetSingleCleaner = (id) => {
+  // debugger;
   return (dispatch) => {
     axios
       .get(`https://localhost:5001/api/cleaners/${id}` )
@@ -52,6 +53,44 @@ export const GetSingleCleaner = (id) => {
       .catch((error) => {
         dispatch({
           type: "GET_SINGLE_CLEANER_ERROR",
+          payload: error,
+        });
+      });
+  };
+};
+export const updateCleaner = (user) => {
+  // debugger;
+  return (dispatch) => {
+    axios
+      // .put("https://localhost:5001/api/cleaners/", user )
+      .put(`https://localhost:5001/api/cleaners/${user.id}`, user )
+      .then((response) => {
+        dispatch({
+          type: "UPDATE_CLEANER",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "UPDATE_CLEANER_ERROR",
+          payload: error,
+        });
+      });
+  };
+};
+export const deleteCleaner = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(`https://localhost:5001/api/cleaners/${id}` )
+      .then((response) => {
+        dispatch({
+          type: "DELETE_CLEANER",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "DELETE_CLEANER_ERROR",
           payload: error,
         });
       });

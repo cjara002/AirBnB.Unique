@@ -4,7 +4,11 @@ import ContactFormSchema from "./ContactFormSchema";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Form, FormGroup, Label } from "reactstrap";
 import { connect } from "react-redux";
-import { addCleaner } from "../../Redux/Actions/Cleaners/cleanerAction";
+import {
+  addCleaner,
+  GetSingleCleaner,
+  updateCleaner
+} from "../../Redux/Actions/Cleaners/cleanerAction";
 import Swal from "sweetalert2";
 
 class ContactFormPage extends React.Component {
@@ -19,40 +23,67 @@ class ContactFormPage extends React.Component {
     isEditing: false,
   };
 
+  componentDidMount() {
+    // debugger;
+    if (this.props.match.params && this.props.match.params.id) {
+      this.props.GetSingleCleaner(this.props.match.params.id);
+      // var single = this.props.singleCleaner;
+      this.setState(( ) => {
+        return {
+          formData: {
+            name: this.props.singleCleaner[0].name,
+            yearsinoperation: this.props.singleCleaner[0].yearsInOperation,
+            imageurl: this.props.singleCleaner[0].imageUrl,
+            city: this.props.singleCleaner[0].city,
+            description: this.props.singleCleaner[0].description,
+            id: this.props.singleCleaner[0].id,
+          },
+          isEditing: true
+        };
+      }, console.log("showFormData:", this.state.formData));
+    }
+  }
+
+  // showSingleCleaner = () => {
+
+  // }
+
   handleSubmit = (values) => {
-      debugger;
-      //debugger does not work. .then is not working either.
-    this.props.addCleaner(values)
-    .then(this.addCleanerSuccess)
-    .catch(this.addCleanerError);
-    // if (!this.state.isEditing) {
-    //   faqsServices.createFaq(values)
-    //     
-    //     .then(this.onCreateNewFaqSuccess)
-    //     .catch(this.onCreateNewFaqError);
-    // } else {
-    //   faqsServices
-    //     .updateSingleFaq(values)
-    //     .then(this.onUpdateSuccess)
-    //     .catch(this.onUpdateError);
-    // }
+    //debugger does not work. .then is not working either.
+
+    if (!this.state.isEditing) {
+      this.props
+      .addCleaner(values)
+      .then(this.addCleanerSuccess)
+      .catch(this.addCleanerError);
+    } else {
+      // debugger;
+      this.props
+        .updateCleaner(values)
+        .then(this.onUpdateSuccess)
+        .catch(this.onUpdateError);
+    }
   };
 
   addCleanerSuccess = () => {
     //   debugger;
-    Swal.fire(
-        "New Cleaner Added.",
-        "success"
-      );
-      this.props.history.push("/cleaners");  
-  }
+    Swal.fire("New Cleaner Added.", "success");
+    this.props.history.push("/cleaners");
+  };
 
   addCleanerError = () => {
-    Swal.fire(
-        "Something is not right. Please try again.",
-         "error"
-         );
-  }
+    Swal.fire("Something is not right. Please try again.", "error");
+  };
+
+  onUpdateSuccess = () => {
+    //   debugger;
+    Swal.fire("Cleaner Updated.", "success");
+    this.props.history.push("/cleaners");
+  };
+
+  onUpdateError = () => {
+    Swal.fire("Something is not right. Please try again.", "error");
+  };
 
   onCancel = () => {
     this.props.history.push("/cleaners");
@@ -278,4 +309,11 @@ class ContactFormPage extends React.Component {
   }
 }
 
-export default connect(null, { addCleaner })(ContactFormPage);
+function mapStateToPros(store) {
+  return {
+    singleCleaner: store.singleCleaner
+  };
+}
+
+export default connect(mapStateToPros, { addCleaner, GetSingleCleaner, updateCleaner })(ContactFormPage);
+// export default connect(null, { addCleaner, GetSingleCleaner })(ContactFormPage);

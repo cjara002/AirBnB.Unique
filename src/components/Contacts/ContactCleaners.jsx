@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCleaners, GetSingleCleaner } from "../../Redux/Actions/Cleaners/cleanerAction";
+import { getCleaners, GetSingleCleaner, deleteCleaner } from "../../Redux/Actions/Cleaners/cleanerAction";
 import SingleCleanerView from "./SingleCleanerView";
+import Swal from "sweetalert2";
 
 class ContactCleaners extends React.Component {
 
@@ -31,6 +32,42 @@ toggle = () => {
   this.setState((prevState) => ({
     modal: !prevState.modal,
   }));
+};
+
+updateSingleContact = id => {
+  this.props.history.push(`/cleanersform/${id}/edit`);
+}
+
+deleteContactUserConfirmation = (id) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    showCancelButton: true,
+    confirmButtonColor: "#042A38",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.value) {
+      this.deleteSingleCleaner(id);
+    }
+  });
+};
+
+deleteSingleCleaner = (id) => {
+this.props.deleteCleaner(id)
+// .then(this.onDeleteSuccess)
+// .catch(this.onDeleteError)
+Swal.fire("Deleted!");
+};
+
+onDeleteSuccess = () => {
+  //   debugger;
+  // Swal.fire("Cleaner Updated.", "success");
+  this.props.getCleaners();
+};
+
+onDeleteError = () => {
+  Swal.fire("Something is not right. Please try again.", "error");
 };
 
   render() {
@@ -131,14 +168,14 @@ toggle = () => {
                       id="profilePhoto"
                     />
                     <h4>{profile.name}</h4>
-                    <h5> City: {profile.city}</h5>
+                    <h5 className="text-white">  {profile.city}</h5>
                     {/* <p>{profile.description}</p>
                     <span>Years in operation: {profile.yearsInOperation}</span> */}
                   </div>
                   <div className="d-flex card-footer">
                     <button
                       type="button"
-                      className="btn btn-outline-dark btn-lg btn-block"
+                      className="btn btn-dark btn-lg btn-block"
                       onClick={() => this.showModal(profile.id)}
                     >
                       View Contact
@@ -151,6 +188,8 @@ toggle = () => {
             single={this.props.singleCleaner}
             isModal={this.state.modal}
             toggle={this.toggle}
+            updateContact={this.updateSingleContact}
+            deleteContact={this.deleteContactUserConfirmation}
             />
         </div>
       </React.Fragment>
@@ -165,4 +204,4 @@ function mapStateToPros(store) {
   };
 }
 
-export default connect(mapStateToPros, { getCleaners, GetSingleCleaner })(ContactCleaners);
+export default connect(mapStateToPros, { getCleaners, GetSingleCleaner, deleteCleaner })(ContactCleaners);

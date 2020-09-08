@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import UniqueTest from "./images/UniqueLogoTest.jpg";
+import "./layoutStyle.css"
 // import {
 //   UncontrolledDropDown,
 //   DropdownMenu,
@@ -15,7 +16,7 @@ import UniqueTest from "./images/UniqueLogoTest.jpg";
 class Header extends Component {
   render() {
     return (
-      <header className="topnavbar-wrapper">
+      <header className="topnavbar-wrapper" id="appHeader">
         {/* START Top Navbar */}
         <nav className="navbar-header">
           <div className="navbar-brand">
@@ -23,19 +24,19 @@ class Header extends Component {
               {/* do on click */}
               <div className="brand-logo text-black">
                 <img
-                style={{"width": "10%", "border-radius": "50%"}}
+                style={{"width": "10%", "borderRadius": "50%"}}
                   className="img-fluid"
                   src={UniqueTest}
                   alt="App Logo"
                 />
-                <small className="ml-2"> Making every expierence UNIQUE</small>
+                <small className="ml-2 text-white"> Making every expierence UNIQUE</small>
               </div>
             </span>
 
             {/* <div className="brand-logo-collapsed">
                 <img
                   className="img-fluid"
-                  src={ImperioTransXS}
+                  src={UniqueTest}
                   alt="App Logo"
                 />
               </div> */}
@@ -46,10 +47,13 @@ class Header extends Component {
               <a
                 className="nav-link"
                 // onClick={this.logOut}
-                style={{ cursor: "pointer", color: "#FFF" }}
+                style={{ cursor: "pointer", color: "black" }}
                 href="/"
+              data-toggle="tooltip"
+              title="Log Out"
               >
-                <em className="icon-logout" />
+                {/* <em className="fa-1x mr-2 fas fa-search" /> */}
+                <em className="fas fa-sign-out-alt text-white" />
               </a>
             </li>
           </ul>
