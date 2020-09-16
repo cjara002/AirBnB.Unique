@@ -1,17 +1,35 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCleaners, GetSingleCleaner, deleteCleaner } from "../../Redux/Actions/Cleaners/cleanerAction";
+import { 
+  //  getCleaners,
+   GetSingleCleaner,
+   deleteCleaner,
+   getPaginatedCleaners
+   } from "../../Redux/Actions/Cleaners/cleanerAction";
 import SingleCleanerView from "./SingleCleanerView";
 import Swal from "sweetalert2";
+import Pagination from "rc-pagination";
+import "rc-pagination/assets/index.css";
+import localeInfo from "rc-pagination/lib/locale/en_US";
+import SingleCleanerProfile from "./SingleCleanerProfile";
 
 class ContactCleaners extends React.Component {
 
   componentDidMount() {
-    this.props.getCleaners();
+    // this.props.getCleaners();
+    var cleaners= this.props.getPaginatedCleaners;
+    cleaners(this.state.pageIndex, this.state.pageSize);
+    // .then(this.getPaginatedCleanersSuccess)
+    // this.getPaginatedCleanersSuccess()
   }
 
   state = {
     modal: false,
+    pageIndex: 0,
+    pageSize: 3,
+    totalCount: 4,
+    totalPages: 0,
+    // mappedCleaners: []
   };
 
   showModal = profile => {
@@ -70,120 +88,62 @@ onDeleteError = () => {
   Swal.fire("Something is not right. Please try again.", "error");
 };
 
+// getPaginatedCleanersSuccess = () => {
+//   debugger;
+//   const cleanersProfile = this.props.paginatedCleaners;
+//   this.setState(() => {
+//     return {
+//     cleanersProfile, 
+//     mappedCleaners: cleanersProfile.map(this.mappedCleanersProfile)
+//     }
+//   })
+// }
+
+mappedCleanersProfile = mappedCleaners => {
+  return (
+    <SingleCleanerProfile 
+    pagCleaner={mappedCleaners}
+    key={mappedCleaners.id}
+    triggershowModal={this.showModal}
+    />
+  )
+}
+
+onChange = current => {
+let paged = current - 1;
+this.setState({
+  pageIndex: current + 1
+},
+this.getNextPage(paged)
+);
+};
+
+getNextPage = paged => {
+  this.props.getPaginatedCleaners(paged, this.state.pageSize)
+}
+// getNextPage = paged => {
+//   businessProfilesService
+//     .getPaginated(paged, this.state.pageSize)
+//     .then(this.nextSuccess)
+//     .catch(this.nextFail);
+// };
+// nextSuccess = response => {
+//   this.setState({
+//     busProfile: response.item.pagedItems,
+//     mappedProfile: response.item.pagedItems.map(this.mapBusProfile),
+//     pageIndex: response.item.pageIndex,
+//     pageSize: response.item.pageSize,
+//     totalCount: response.item.totalCount,
+//     totalPages: response.item.totalPages
+//   });
+// };
+
   render() {
     return (
       <React.Fragment>
         <div className="row">
-          {this.props &&
-            this.props.cleaners.map((profile) => (
-              <div className="col-sm-6 col-lg-4" key={profile.id}>
-                <div className="card-default card" id="contactMenu">
-                  {/*
-                  <div className="ml-auto" id="menuShortcut">
-                    <div className="dropdown">
-                      <button
-                        type="button"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        className="btn btn-outline-secondary"
-                        onClick={this.showMenu}
-                        // onClick={this.activeMenu}
-                      >
-                        <em
-                          className="fa fa-ellipsis-h fa-lg"
-                          id="toggleButton"
-                        />
-                      </button>
-                      <div
-                        tabIndex={-1}
-                        role="menu"
-                        aria-hidden="true"
-                        className={
-                          this.state.optionsOpen
-                            ? "dropdown-menu-right-forced animated fadeInLeft dropdown-menu show"
-                            : "dropdown-menu-right-forced animated fadeInLeft dropdown-menu"
-                        }
-                        x-placement="bottom-start"
-                        style={{
-                          position: "absolute",
-                          willChange: "transform",
-                          top: 0,
-                          left: 0,
-                          transform: "translate3d(-106px, 31px, 0px)",
-                        }}
-                        data-placement="bottom-start"
-                        id="subMenu"
-                      >
-                        <button
-                          type="button"
-                          tabIndex={0}
-                          className="dropdown-item"
-                          id="subMenuIcon"
-                        >
-                          <em className="fa-fw fa fa-plus mr-2" />
-                          <span>Edit contact</span>
-                        </button>
-
-                        {/* <button
-                        type="button"
-                        tabIndex={0}
-                        className="dropdown-item"
-
-                      >
-                        <em className="fa-fw fa fa-plus mr-2" />
-                        <span>New contact</span>
-                      </button> 
-
-                        <button
-                          type="button"
-                          tabIndex={0}
-                          className="dropdown-item"
-                          id="subMenuIcon"
-                        >
-                          <em className="fa-fw fas fa-minus mr-2" />
-                          <span>Delete contact</span>
-                        </button>
-                        <button
-                          type="button"
-                          tabIndex={0}
-                          className="dropdown-item"
-                          id="subMenuIcon"
-                        >
-                          <em className="fa-fw fas fa-share mr-2" />
-                          <span>Share contact</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* End of Menu */}
-
-                  {/* Start of Card */}
-
-                  <div className="text-center card-body" id="contactCard">
-                    <img
-                      className=" mb-2 rounded-circle-thumb32"
-                      src={profile.imageUrl}
-                      alt="Contact"
-                      id="profilePhoto"
-                    />
-                    <h4>{profile.name}</h4>
-                    <h5 className="text-white">  {profile.city}</h5>
-                    {/* <p>{profile.description}</p>
-                    <span>Years in operation: {profile.yearsInOperation}</span> */}
-                  </div>
-                  <div className="d-flex card-footer">
-                    <button
-                      type="button"
-                      className="btn btn-dark btn-lg btn-block"
-                      onClick={() => this.showModal(profile.id)}
-                    >
-                      View Contact
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+                 {/* {this.state.mappedCleaners} */}
+                 {this.props.paginatedCleaners.map(this.mappedCleanersProfile)}
             <SingleCleanerView  
             single={this.props.singleCleaner}
             isModal={this.state.modal}
@@ -192,6 +152,15 @@ onDeleteError = () => {
             deleteContact={this.deleteContactUserConfirmation}
             />
         </div>
+        <div style={{ padding: 25 }}>
+            <Pagination
+              onChange={this.onChange}
+              currentPage={this.state.pageIndex}
+              total={this.state.totalCount}
+              pageSize={this.state.pageSize}
+              locale={localeInfo}
+            />
+          </div>
       </React.Fragment>
     );
   }
@@ -200,8 +169,15 @@ onDeleteError = () => {
 function mapStateToPros(store) {
   return {
     cleaners: store.cleaners,
-    singleCleaner: store.singleCleaner
+    singleCleaner: store.singleCleaner,
+    paginatedCleaners: store.paginatedCleaners
   };
 }
 
-export default connect(mapStateToPros, { getCleaners, GetSingleCleaner, deleteCleaner })(ContactCleaners);
+export default connect(mapStateToPros, 
+  { 
+    // getCleaners,
+    getPaginatedCleaners,
+    GetSingleCleaner,
+    deleteCleaner
+   })(ContactCleaners);

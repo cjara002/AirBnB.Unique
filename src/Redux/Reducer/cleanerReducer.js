@@ -3,6 +3,7 @@ const intialState = {
   fetched: false,
   cleaners: [],
   singleCleaner: [],
+  paginatedCleaners: [],
   error: null,
 };
 
@@ -21,6 +22,15 @@ const cleanerReducer = (state = intialState, action) => {
         fetching: true,
         fetched: true,
         cleaners: action.payload,
+      };
+      break;
+    }
+    case "RECEIVE_PAGINATED_CLEANERS": {
+      state = {
+        ...state,
+        fetching: true,
+        fetched: true,
+        paginatedCleaners: action.payload,
       };
       break;
     }

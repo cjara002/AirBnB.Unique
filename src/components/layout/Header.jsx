@@ -29,7 +29,16 @@ class Header extends Component {
                   src={UniqueTest}
                   alt="App Logo"
                 />
-                <small className="ml-2 text-white"> Making every expierence UNIQUE</small>
+                <small className="ml-2 text-white"> Making every expierence 
+                &nbsp;
+                <span className="headerRainbow">UNIQUE</span>
+                {/* <span>U</span>
+                <span>N</span>
+                <span>I</span>
+                <span>Q</span>
+                <span>U</span>
+                <span>U</span> */}
+                </small>
               </div>
             </span>
 

@@ -96,3 +96,19 @@ background-color: #133a26;
 /* .content-heading {
     border-radius: 5%;
 } */
+#formCleanerTitle {
+    text-align: center;
+    color: #EAA220;
+    background-color: #133a26;
+}
+
+#cleanerFormAddnUpdate{
+    border: solid; 
+    border-color: #EAA220; 
+    background-color: rgb(19, 58, 38);
+    color: white;
+}
+
+#cleanerFormAddnUpdate label{
+    text-align: center;
+}
