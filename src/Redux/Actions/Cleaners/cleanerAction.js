@@ -20,10 +20,9 @@ export const getCleaners = (dispatch) => {
   }
 };
 export const getPaginatedCleaners = (pageIndex, pageSize) => {
-  debugger;
   return (dispatch) => {
-  dispatch({ type: "FETCH_CLEANERS_START" });
-  axios
+  // dispatch({ type: "FETCH_CLEANERS_START" });
+  return axios
     .get(`https://localhost:5001/api/cleaners/paginate?pageIndex=${pageIndex}&&pageSize=${pageSize}`)
     .then((response) => {
       dispatch({
@@ -42,7 +41,7 @@ export const getPaginatedCleaners = (pageIndex, pageSize) => {
 
 export const addCleaner = (user) => {
   return (dispatch) => {
-    axios
+    return axios
       .post("https://localhost:5001/api/cleaners",  user )
       .then((response) => {
         dispatch({
@@ -79,10 +78,8 @@ export const GetSingleCleaner = (id) => {
   };
 };
 export const updateCleaner = (user) => {
-  // debugger;
   return (dispatch) => {
-    axios
-      // .put("https://localhost:5001/api/cleaners/", user )
+    return axios
       .put(`https://localhost:5001/api/cleaners/${user.id}`, user )
       .then((response) => {
         dispatch({
@@ -100,7 +97,7 @@ export const updateCleaner = (user) => {
 };
 export const deleteCleaner = (id) => {
   return (dispatch) => {
-    axios
+    return axios
       .delete(`https://localhost:5001/api/cleaners/${id}` )
       .then((response) => {
         dispatch({

@@ -101,7 +101,7 @@ class SingleCleanerView extends React.Component {
                           tabIndex={0}
                           className="dropdown-item"
                           id="subMenuIcon"
-                          onClick={() => this.props.deleteContact(this.props.single[0].id)}
+                          onClick={() => this.props.deleteContact(this.props.single[0])}
                         >
                           <em className="fa-fw fas fa-minus mr-2" />
                           <span>Delete contact</span>

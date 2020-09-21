@@ -11,12 +11,27 @@ const SingleCleanerProfile = props => {
                   <div className="text-center card-body" id="contactCard">
                     <img
                       className=" mb-2 rounded-circle-thumb32"
-                      src={props.pagCleaner.imageUrl}
+                      // src={props.pagCleaner.imageUrl}
+                      src={
+                        props.isProfileLoaded
+                          ? props.pagCleaner.imageUrl
+                          : `https://bit.ly/2qp36ol`
+                      }
                       alt="Contact"
                       id="profilePhoto"
                     />
-                    <h4>{props.pagCleaner.name}</h4>
-                    <h5 className="text-white">  {props.pagCleaner.city}</h5>
+                    {props.isProfileLoaded
+                          ?  <h4>{props.pagCleaner.name}</h4>
+                          :  <h4>...Name</h4>
+                          }
+
+                    {/* <h4>{props.pagCleaner.name}</h4> */}
+                    {/* <h4>{props.pagCleaner.name}</h4> */}
+                   
+                    {props.isProfileLoaded
+                          ?   <h5 className="text-white">  {props.pagCleaner.city}</h5>
+                          :   <h5 className="text-white">  ...City</h5>
+                          }
                     {/* <p>{profile.description}</p>
                     <span>Years in operation: {profile.yearsInOperation}</span> */}
                   </div>

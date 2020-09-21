@@ -3,7 +3,6 @@ import { Formik, Field } from "formik";
 import ContactFormSchema from "./ContactFormSchema";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { 
-  // Col,
    Form, FormGroup, Label } from "reactstrap";
 import { connect } from "react-redux";
 import {
@@ -11,7 +10,7 @@ import {
   GetSingleCleaner,
   updateCleaner
 } from "../../Redux/Actions/Cleaners/cleanerAction";
-// import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import "./ContactStyles.css"
 
 class ContactFormPage extends React.Component {
@@ -46,41 +45,80 @@ class ContactFormPage extends React.Component {
   }
 
   handleSubmit = (values) => {
-    //debugger does not work. .then is not working either.
-
     if (!this.state.isEditing) {
       this.props
       .addCleaner(values)
-      this.props.history.push("/cleaners");
-      // .then(this.addCleanerSuccess)
-      // .catch(this.addCleanerError);
+      .then(this.addCleanerSuccess)
+      .catch(this.addCleanerError);
     } else {
-      // debugger;
       this.props
         .updateCleaner(values)
-        this.props.history.push("/cleaners");
-        // .then(this.onUpdateSuccess)
-        // .catch(this.onUpdateError);
+        .then(this.onUpdateSuccess)
+        .catch(this.onUpdateError);
     }
   };
 
-  // addCleanerSuccess = () => {
-  //   Swal.fire("New Cleaner Added.", "success");
-  //   this.props.history.push("/cleaners");
-  // };
+  addCleanerSuccess = () => {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Cleaner Added", 
+      showConfirmButton: false,
+      timer: 1500,
+      backdrop: `
+      rgb(234, 162, 32, .5)
+      left top
+      no-repeat
+    `
+    });
+    this.props.history.push("/cleaners");
+  };
 
-  // addCleanerError = () => {
-  //   Swal.fire("Something is not right. Please try again.", "error");
-  // };
+  addCleanerError = () => {
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: "Cleaner not added. Please try again...", 
+      showConfirmButton: false,
+      timer: 1500,
+      backdrop: `
+      rgb(234, 162, 32, .5)
+      left top
+      no-repeat
+    `
+    });
+  };
 
-  // onUpdateSuccess = () => {
-  //   Swal.fire("Cleaner Updated.", "success");
-  //   this.props.history.push("/cleaners");
-  // };
+  onUpdateSuccess = () => {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Cleaner Updated", 
+      showConfirmButton: false,
+      timer: 1500,
+      backdrop: `
+      rgb(234, 162, 32, .5)
+      left top
+      no-repeat
+    `
+    });
+    this.props.history.push("/cleaners");
+  };
 
-  // onUpdateError = () => {
-  //   Swal.fire("Something is not right. Please try again.", "error");
-  // };
+  onUpdateError = () => {
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: "Cleaner not updated. Please try again...", 
+      showConfirmButton: false,
+      timer: 1500,
+      backdrop: `
+      rgb(234, 162, 32, .5)
+      left top
+      no-repeat
+    `
+    });
+  };
 
   onCancel = () => {
     this.props.history.push("/cleaners");
@@ -111,20 +149,13 @@ class ContactFormPage extends React.Component {
                   <Form
                     onSubmit={handleSubmit}
                     id="cleanerFormAddnUpdate"
-                    // className="containerFaq"
-                    // id="faqBox"
                   >
                     <FormGroup row>
-                      {/* <Col
-                        // sm={10}
-                        //   className="colFaq"
-                      > */}
-                        <Label>Name </Label>
+                        <Label className="labelContainer">Name </Label>
                         <Field
                           name="name"
                           type="text"
                           value={values.name}
-                          //   placeholder="Please write a questions here.."
                           className={
                             errors.name && touched.name
                               ? "form-control error"
@@ -132,51 +163,19 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.name && touched.name && (
-                          <span className="input-feedback text-danger">
+                          <span className="input-feedback text-danger" id="feedbackFormat">
                             {errors.name}
                           </span>
                         )}
-                      {/* </Col> */}
                     </FormGroup>
-  
-                    {/* <FormGroup row>
-                        <Col
-                          sm={10}
-                          //   className="colFaq"
-                        >
-                              <Label>Years In Operation </Label>
-                          <Field
-                            name="yearsinoperation"
-                            type="text"
-                          //   type="number"
-                            //   component="select"
-                            value={values.yearsinoperation}
-                            className={
-                              errors.yearsinoperation && touched.yearsinoperation
-                                ? "form-control error"
-                                : "form-control"
-                            }
-                          >
-                            {errors.yearsinoperation && touched.yearsinoperation && (
-                              <span className="input-feedback text-danger">
-                                {errors.yearsinoperation}
-                              </span>
-                            )}
-                          </Field>
-                        </Col>
-                      </FormGroup> */}
-  
+
                     <FormGroup row>
-                      {/* <Col
-                        // sm={10}
-                        //   className="colFaq"
-                      > */}
-                        <Label>Years In Operation </Label>
+                        <Label className="labelContainer">Years In Operation </Label>
                         <Field
                           name="yearsinoperation"
                           type="number"
                           value={values.yearsinoperation}
-                          //   placeholder="Please write a questions here.."
+                        
                           className={
                             errors.yearsinoperation && touched.yearsinoperation
                               ? "form-control error"
@@ -184,26 +183,19 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.yearsinoperation && touched.yearsinoperation && (
-                          <span className="input-feedback text-danger">
+                          <span className="input-feedback text-danger" id="feedbackFormat">
                             {errors.yearsinoperation}
                           </span>
                         )}
-                      {/* </Col> */}
                     </FormGroup>
   
                     <FormGroup row>
-                      {/* <Col
-                        // sm={10}
-                        //   className="colFaq"
-                      > */}
-                        <Label>Image </Label>
+                        <Label className="labelContainer">Image </Label>
                         <Field
+                        // id="fieldContainer"
                           name="imageurl"
                           type="text"
-                          //   component="textarea"
-                          //   rows="5"
                           value={values.imageurl}
-                          //   placeholder="Please write an answere here..."
                           className={
                             errors.imageurl && touched.imageurl
                               ? "form-control error"
@@ -211,25 +203,17 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.imageurl && touched.imageurl && (
-                          <span className="input-feedback text-danger">
+                          <span className="input-feedback text-danger " id="feedbackFormat">
                             {errors.imageurl}
                           </span>
                         )}
-                      {/* </Col> */}
                     </FormGroup>
   
                     <FormGroup row>
-                      {/* <Col
-                        // sm={10}
-                        //   className="colFaq"
-                      > */}
-                        <Label>City </Label>
+                        <Label className="labelContainer">City </Label>
                         <Field
                           name="city"
-                          //   component="textarea"
-                          //   rows="5"
                           value={values.city}
-                          //   placeholder="Please write an answere here..."
                           className={
                             errors.city && touched.city
                               ? "form-control error"
@@ -237,25 +221,19 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.city && touched.city && (
-                          <span className="input-feedback text-danger">
+                          <span className="input-feedback text-danger" id="feedbackFormat">
                             {errors.city}
                           </span>
                         )}
-                      {/* </Col> */}
                     </FormGroup>
   
                     <FormGroup row>
-                      {/* <Col
-                        // sm={10}
-                        //   className="colFaq"
-                      > */}
-                        <Label>Description </Label>
+                        <Label className="labelContainer">Description </Label>
                         <Field
                           name="description"
                           component="textarea"
                           rows="5"
                           value={values.description}
-                          //   placeholder="Please write an descriptione here..."
                           className={
                             errors.description && touched.description
                               ? "form-control error"
@@ -263,11 +241,10 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.description && touched.description && (
-                          <span className="input-feedback text-danger">
+                          <span className="input-feedback text-danger" id="feedbackFormat">
                             {errors.description}
                           </span>
                         )}
-                      {/* </Col> */}
                     </FormGroup>
   
                     {/* <FormGroup style={{ textAlign: "right", padding: "10px" }}> */}
