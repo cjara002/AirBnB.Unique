@@ -8,9 +8,11 @@ const ContactFormSchema = Yup.object().shape({
 
     yearsinoperation: Yup.string().required("Number of years is required."),
 
-    imageurl: Yup.string()
-    .min(1, "The link is too short." )
-    .max(255, "The image URL should be less than 255 charcters.")
+    // imageurl: Yup.string()
+    // .min(1, "The link is too short." )
+    // .max(255, "The image URL should be less than 255 charcters.")
+    // .required("A photo is required."),
+    imageurl: Yup.mixed()
     .required("A photo is required."),
     
     city: Yup.string()

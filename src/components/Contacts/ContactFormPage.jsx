@@ -12,6 +12,7 @@ import {
 } from "../../Redux/Actions/Cleaners/cleanerAction";
 import Swal from "sweetalert2";
 import "./ContactStyles.css"
+import Thumb from "./Thumb"
 
 class ContactFormPage extends React.Component {
   state = {
@@ -57,6 +58,7 @@ class ContactFormPage extends React.Component {
         .catch(this.onUpdateError);
     }
   };
+
 
   addCleanerSuccess = () => {
     Swal.fire({
@@ -124,6 +126,26 @@ class ContactFormPage extends React.Component {
     this.props.history.push("/cleaners");
   };
 
+  // onChangeImageUpload = event => {
+  //   let file = event.target.files[0];
+  //   let reader = new FileReader();
+  //   reader.readAsDataURL(file[0]);
+
+  //   reader.onloaded = event => {
+  //   // a call to an upload service for images
+  //   let imageData = { file: event.target.result}
+  //   console.log("onChangeImageUpload:", imageData.file )
+  //   this.setState=({
+  //     formData: {
+  //       imageurl: imageData.file
+  //     }
+  //   })
+
+  //   }
+  // }
+
+  
+
   render() {
     return (
       <React.Fragment>
@@ -141,6 +163,8 @@ class ContactFormPage extends React.Component {
               handleSubmit,
               isValid,
               isSubmitting,
+              // setFieldValue,
+              // render
             } = props;
             return (
               <div className="content-wrapper">
@@ -156,6 +180,7 @@ class ContactFormPage extends React.Component {
                           name="name"
                           type="text"
                           value={values.name}
+                          // value={this.state.formData.name}
                           className={
                             errors.name && touched.name
                               ? "form-control error"
@@ -175,6 +200,7 @@ class ContactFormPage extends React.Component {
                           name="yearsinoperation"
                           type="number"
                           value={values.yearsinoperation}
+                          // value={this.state.formData.yearsinoperation}
                         
                           className={
                             errors.yearsinoperation && touched.yearsinoperation
@@ -190,7 +216,7 @@ class ContactFormPage extends React.Component {
                     </FormGroup>
   
                     <FormGroup row>
-                        <Label className="labelContainer">Image </Label>
+                        <Label className="labelContainer"> Choose Image</Label>
                         <Field
                         // id="fieldContainer"
                           name="imageurl"
@@ -207,6 +233,40 @@ class ContactFormPage extends React.Component {
                             {errors.imageurl}
                           </span>
                         )}
+                        {/* <input
+                        // id="fieldContainer"
+                          name="imageurl"
+                          type="file"
+                          // value={this.state.formData.imageurl}
+                          // value={values.imageurl.name}
+                        //   value={(event) => {
+                        //     console.log("Image Upload", event.currentTarget.files[0] )
+                        //     setFieldValue("values.imageurl", event.currentTarget.files[0]);
+                        //   }
+                        // }
+                          // onChange={(event) => {
+                          //   console.log("Image Upload", event.currentTarget.files[0] )
+                          //   setFieldValue("file", event.currentTarget.files[0]);
+                          // }}
+                          onChange={(event) => {
+                            console.log("Image Upload", event.currentTarget.files[0] )
+
+                            // setFieldValue("imageurl", event.currentTarget.files[0]);
+                          }}
+                          // onChange={(event) => this.onChangeImageUpload(event)}
+                          className={
+                            errors.imageurl && touched.imageurl
+                              ? "form-control error"
+                              : "form-control"
+                          }
+                        />
+                        {errors.imageurl && touched.imageurl && (
+                          <span className="input-feedback text-danger " id="feedbackFormat">
+                            {errors.imageurl}
+                          </span>
+                        )} */}
+
+                       <Thumb file={values.imageurl} />
                     </FormGroup>
   
                     <FormGroup row>
@@ -214,6 +274,7 @@ class ContactFormPage extends React.Component {
                         <Field
                           name="city"
                           value={values.city}
+                          // value={this.state.formData.city}
                           className={
                             errors.city && touched.city
                               ? "form-control error"
@@ -225,6 +286,8 @@ class ContactFormPage extends React.Component {
                             {errors.city}
                           </span>
                         )}
+                        
+
                     </FormGroup>
   
                     <FormGroup row>
@@ -234,6 +297,7 @@ class ContactFormPage extends React.Component {
                           component="textarea"
                           rows="5"
                           value={values.description}
+                          // value={this.state.formData.description}
                           className={
                             errors.description && touched.description
                               ? "form-control error"
