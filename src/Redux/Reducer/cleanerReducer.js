@@ -34,6 +34,15 @@ const cleanerReducer = (state = intialState, action) => {
       };
       break;
     }
+    case "RECEIVE_SEARCH_PAGINATED_CLEANERS": {
+      state = {
+        ...state,
+        fetching: true,
+        fetched: true,
+        searchedQuery:  action.payload,
+      };
+      break;
+    }
     case "ADD_CLEANER": {
         const newCleaner = state.cleaners.concat(action.payload)
       state = {

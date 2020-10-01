@@ -12,8 +12,11 @@ import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 import localeInfo from "rc-pagination/lib/locale/en_US";
 import SingleCleanerProfile from "./SingleCleanerProfile";
+// import ContactHeading from "./ContactHeading"
+import SearchContacts from "./SearchContacts";
 
 class ContactCleaners extends React.Component {
+
   componentDidMount() {
     this.fetchPaginatedCleaners();
   }
@@ -25,11 +28,20 @@ class ContactCleaners extends React.Component {
     totalCount: 9,
     totalPages: 9,
     imageLoaded: false,
+    initiatedSearch: false,
+    query: "",
+    searchBarShown: false,
     mappedCleaners: []
   };
 
   fetchPaginatedCleaners = () => {
+    this.state.query.length > 0 && this.state.initiatedSearch ?
+    //will put my search call here, need pageindex, pagesize, and query
      this.props.getPaginatedCleaners(this.state.pageIndex, this.state.pageSize)
+      .then(this.getPaginatedCleanersSuccess)
+      .catch(this.getPaginatedCleanersError)
+      :
+      this.props.getPaginatedCleaners(this.state.pageIndex, this.state.pageSize)
       .then(this.getPaginatedCleanersSuccess)
       .catch(this.getPaginatedCleanersError)
   };
@@ -149,9 +161,66 @@ class ContactCleaners extends React.Component {
     });
   };
 
+  submitNewCleaner = () => {
+    const path = "/cleanersform";
+    this.props.history.push(path);
+  };
+
+  toggleSearch = () => {
+    this.setState({
+      searchBarShown: !this.state.searchBarShown
+    })
+  }
+
+  searchWithQuery = event => {
+    // console.log("searchWithQuery:", event.target.value );
+    var value = event.target.value;
+    this.setState( () => ({ query: value }),
+      () => value === "" ?
+      this.setState({pageIndex: 0}, ()=> {
+        this.fetchPaginatedCleaners();
+      })
+      : "is 0"
+    )
+  }
+
+  handleClickSearch = () => {
+    this.setState(
+      () => {
+        return{
+          initiatedSearch: true
+        };
+      },
+      () => this.fetchPaginatedCleaners()
+    );
+  };
+
   render() {
     return (
       <React.Fragment>
+        {/* <ContactHeading history={this.props.history}/> */}
+        <div className="content-heading">
+          Cleaners
+          <div className="ml-auto">
+           <SearchContacts 
+           searchStarted={this.state.searchBarShown} 
+           toggleSearch={this.toggleSearch}
+           initialQuery={this.state.query}
+           onChangeSearch={this.searchWithQuery}
+           handleClickSearch={this.handleClickSearch}
+           />
+           
+            {" "}
+            <em
+              className="fa-1x mr-2 fas fa-user-plus"
+              onClick={this.submitNewCleaner}
+              style={{ cursor: "pointer" }}
+              data-toggle="tooltip"
+              title="Add Cleaner"
+            ></em>
+          </div>
+        </div>
+
         <div className="row">
           {this.state.mappedCleaners.map(this.mappedCleanersProfile)}
           <SingleCleanerView

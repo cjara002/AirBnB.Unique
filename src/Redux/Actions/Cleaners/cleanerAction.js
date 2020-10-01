@@ -38,6 +38,25 @@ export const getPaginatedCleaners = (pageIndex, pageSize) => {
     });
   }
 };
+export const getSearchPaginatedCleaners = (pageIndex, pageSize, query) => {
+  return (dispatch) => {
+  // dispatch({ type: "FETCH_CLEANERS_START" });
+  return axios
+    .get(`https://localhost:5001/api/cleaners/paginate?pageIndex=${pageIndex}&&pageSize=${pageSize}&&query=${query}`)
+    .then((response) => {
+      dispatch({
+        type: "RECEIVE_SEARCH_PAGINATED_CLEANERS",
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: "FETCH_CLEANERS_ERROR",
+        payload: error,
+      });
+    });
+  }
+};
 
 export const addCleaner = (user) => {
   return (dispatch) => {
