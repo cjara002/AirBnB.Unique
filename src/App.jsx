@@ -8,7 +8,7 @@ import store from "./Store";
 class App extends React.Component {
 
   render() {
-    console.log("Starting App from App.jsx");
+    // console.log("Starting App from App.jsx");
     return (
       <React.Fragment>
         <Provider store={store}>

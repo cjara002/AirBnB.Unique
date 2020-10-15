@@ -39,10 +39,11 @@ export const getPaginatedCleaners = (pageIndex, pageSize) => {
   }
 };
 export const getSearchPaginatedCleaners = (pageIndex, pageSize, query) => {
+  // debugger;
   return (dispatch) => {
   // dispatch({ type: "FETCH_CLEANERS_START" });
   return axios
-    .get(`https://localhost:5001/api/cleaners/paginate?pageIndex=${pageIndex}&&pageSize=${pageSize}&&query=${query}`)
+    .get(`https://localhost:5001/api/cleaners/search?pageIndex=${pageIndex}&&pageSize=${pageSize}&&query=${query}`)
     .then((response) => {
       dispatch({
         type: "RECEIVE_SEARCH_PAGINATED_CLEANERS",

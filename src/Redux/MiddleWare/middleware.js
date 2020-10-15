@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 
 const logger = (Store) => (next) => (action) => {
     console.log("action fired", action);
+    // what does the next action do?
     next(action);
   }
   

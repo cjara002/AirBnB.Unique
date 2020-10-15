@@ -5,6 +5,7 @@ import {
   GetSingleCleaner,
   deleteCleaner,
   getPaginatedCleaners,
+  getSearchPaginatedCleaners
 } from "../../Redux/Actions/Cleaners/cleanerAction";
 import SingleCleanerView from "./SingleCleanerView";
 import Swal from "sweetalert2";
@@ -36,10 +37,9 @@ class ContactCleaners extends React.Component {
 
   fetchPaginatedCleaners = () => {
     this.state.query.length > 0 && this.state.initiatedSearch ?
-    //will put my search call here, need pageindex, pagesize, and query
-     this.props.getPaginatedCleaners(this.state.pageIndex, this.state.pageSize)
-      .then(this.getPaginatedCleanersSuccess)
-      .catch(this.getPaginatedCleanersError)
+     this.props.getSearchPaginatedCleaners(this.state.pageIndex, this.state.pageSize, this.state.query)
+      .then(this.getSearchPaginatedCleanersSuccess)
+      .catch(this.getSearchPaginatedCleanersError)
       :
       this.props.getPaginatedCleaners(this.state.pageIndex, this.state.pageSize)
       .then(this.getPaginatedCleanersSuccess)
@@ -50,13 +50,34 @@ class ContactCleaners extends React.Component {
     const cleanersProfile = this.props.paginatedCleaners;
     this.setState(() => ({
         imageLoaded: true,
-        mappedCleaners: cleanersProfile
+        // totalCount: cleanersProfile.totalCount,
+        // totalPages: cleanersProfile.totalPages,
+        pageIndex: cleanersProfile.pageIndex,
+        pageSize: cleanersProfile.pageSize,
+        mappedCleaners: cleanersProfile.pagedItems
       }
   ));
   };
 
   getPaginatedCleanersError = (e) => {
     console.log("getPaginatedCleanersErrors:", e);
+  };
+
+  getSearchPaginatedCleanersSuccess = () => {
+    const searchedQuery = this.props.searchedQuery;
+    this.setState(() => ({
+        imageLoaded: true,
+                // totalCount: searchedQuery.totalCount,
+        // totalPages: searchedQuery.totalPages,
+        pageIndex: searchedQuery.pageIndex,
+        pageSize: searchedQuery.pageSize,
+        mappedCleaners: searchedQuery.pagedItems
+      }
+  ));
+  };
+
+  getSearchPaginatedCleanersError = (e) => {
+    console.log("getSearchPaginatedCleanersError:", e);
   };
 
   showModal = (profile) => {
@@ -112,7 +133,7 @@ class ContactCleaners extends React.Component {
         cleanersProfile => cleanersProfile.id !== id
        )
       this.setState(() => ({
-        mappedCleaners: cleanersProfile,
+        mappedCleaners: cleanersProfile.pagedItems,
         modal: false
       }
   ));    
@@ -157,7 +178,7 @@ class ContactCleaners extends React.Component {
     const cleanersProfile = this.props.paginatedCleaners;
     this.setState({
       // imageLoaded: false,
-      mappedCleaners: cleanersProfile
+      mappedCleaners: cleanersProfile.pagedItems
     });
   };
 
@@ -250,6 +271,7 @@ function mapStateToPros(store) {
     cleaners: store.cleaners,
     singleCleaner: store.singleCleaner,
     paginatedCleaners: store.paginatedCleaners,
+    searchedQuery: store.searchedQuery
   };
 }
 
@@ -258,4 +280,5 @@ export default connect(mapStateToPros, {
   getPaginatedCleaners,
   GetSingleCleaner,
   deleteCleaner,
+  getSearchPaginatedCleaners
 })(ContactCleaners);
