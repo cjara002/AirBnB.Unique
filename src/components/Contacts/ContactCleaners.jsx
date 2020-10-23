@@ -1,23 +1,20 @@
-import React from "react";
 import { connect } from "react-redux";
+import localeInfo from "rc-pagination/lib/locale/en_US";
+import Pagination from "rc-pagination";
+import React from "react";
+import SearchContacts from "./SearchContacts";
+import SingleCleanerProfile from "./SingleCleanerProfile";
+import SingleCleanerView from "./SingleCleanerView";
+import Swal from "sweetalert2";
 import {
-  //  getCleaners,
   GetSingleCleaner,
   deleteCleaner,
   getPaginatedCleaners,
-  getSearchPaginatedCleaners
+  getSearchPaginatedCleaners,
 } from "../../Redux/Actions/Cleaners/cleanerAction";
-import SingleCleanerView from "./SingleCleanerView";
-import Swal from "sweetalert2";
-import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
-import localeInfo from "rc-pagination/lib/locale/en_US";
-import SingleCleanerProfile from "./SingleCleanerProfile";
-// import ContactHeading from "./ContactHeading"
-import SearchContacts from "./SearchContacts";
 
 class ContactCleaners extends React.Component {
-
   componentDidMount() {
     this.fetchPaginatedCleaners();
   }
@@ -32,31 +29,35 @@ class ContactCleaners extends React.Component {
     initiatedSearch: false,
     query: "",
     searchBarShown: false,
-    mappedCleaners: []
+    mappedCleaners: [],
   };
 
   fetchPaginatedCleaners = () => {
-    this.state.query.length > 0 && this.state.initiatedSearch ?
-     this.props.getSearchPaginatedCleaners(this.state.pageIndex, this.state.pageSize, this.state.query)
-      .then(this.getSearchPaginatedCleanersSuccess)
-      .catch(this.getSearchPaginatedCleanersError)
-      :
-      this.props.getPaginatedCleaners(this.state.pageIndex, this.state.pageSize)
-      .then(this.getPaginatedCleanersSuccess)
-      .catch(this.getPaginatedCleanersError)
+    this.state.query.length > 0 && this.state.initiatedSearch
+      ? this.props
+          .getSearchPaginatedCleaners(
+            this.state.pageIndex,
+            this.state.pageSize,
+            this.state.query
+          )
+          .then(this.getSearchPaginatedCleanersSuccess)
+          .catch(this.getSearchPaginatedCleanersError)
+      : this.props
+          .getPaginatedCleaners(this.state.pageIndex, this.state.pageSize)
+          .then(this.getPaginatedCleanersSuccess)
+          .catch(this.getPaginatedCleanersError);
   };
 
   getPaginatedCleanersSuccess = () => {
     const cleanersProfile = this.props.paginatedCleaners;
     this.setState(() => ({
-        imageLoaded: true,
-        // totalCount: cleanersProfile.totalCount,
-        // totalPages: cleanersProfile.totalPages,
-        pageIndex: cleanersProfile.pageIndex,
-        pageSize: cleanersProfile.pageSize,
-        mappedCleaners: cleanersProfile.pagedItems
-      }
-  ));
+      imageLoaded: true,
+      // totalCount: cleanersProfile.totalCount,
+      // totalPages: cleanersProfile.totalPages,
+      pageIndex: cleanersProfile.pageIndex,
+      pageSize: cleanersProfile.pageSize,
+      mappedCleaners: cleanersProfile.pagedItems,
+    }));
   };
 
   getPaginatedCleanersError = (e) => {
@@ -66,14 +67,13 @@ class ContactCleaners extends React.Component {
   getSearchPaginatedCleanersSuccess = () => {
     const searchedQuery = this.props.searchedQuery;
     this.setState(() => ({
-        imageLoaded: true,
-                // totalCount: searchedQuery.totalCount,
-        // totalPages: searchedQuery.totalPages,
-        pageIndex: searchedQuery.pageIndex,
-        pageSize: searchedQuery.pageSize,
-        mappedCleaners: searchedQuery.pagedItems
-      }
-  ));
+      imageLoaded: true,
+      // totalCount: searchedQuery.totalCount,
+      // totalPages: searchedQuery.totalPages,
+      pageIndex: searchedQuery.pageIndex,
+      pageSize: searchedQuery.pageSize,
+      mappedCleaners: searchedQuery.pagedItems,
+    }));
   };
 
   getSearchPaginatedCleanersError = (e) => {
@@ -88,7 +88,8 @@ class ContactCleaners extends React.Component {
         modal: !prevState.modal,
         singleCleaner: single,
       };
-    }, console.log("showModal:", this.state.singleCleaner));
+    });
+    // , console.log("showModal:", this.state.singleCleaner));
   };
 
   toggle = () => {
@@ -104,8 +105,7 @@ class ContactCleaners extends React.Component {
   deleteContactUserConfirmation = (single) => {
     Swal.fire({
       icon: "warning",
-      html: 
-      `Are you sure you want to delete <b>${single.name}</b> from <b>${single.city}</b>?`,
+      html: `Are you sure you want to delete <b>${single.name}</b> from <b>${single.city}</b>?`,
       showCancelButton: true,
       confirmButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
@@ -117,32 +117,32 @@ class ContactCleaners extends React.Component {
   };
 
   deleteSingleCleaner = (id) => {
-    this.props.deleteCleaner(id)
-    .then(this.onDeleteSuccess(id))
-    .catch(this.onDeleteError);
+    this.props
+      .deleteCleaner(id)
+      .then(this.onDeleteSuccess(id))
+      .catch(this.onDeleteError);
   };
 
-  onDeleteSuccess = id => {
-       Swal.fire({
-        icon: "deleted",
-        title: "Cleaner Deleted", 
-        showConfirmButton: false,
-        timer: 1500,
-      })
-      const cleanersProfile = this.props.paginatedCleaners.filter(
-        cleanersProfile => cleanersProfile.id !== id
-       )
-      this.setState(() => ({
-        mappedCleaners: cleanersProfile.pagedItems,
-        modal: false
-      }
-  ));    
+  onDeleteSuccess = (id) => {
+    Swal.fire({
+      icon: "deleted",
+      title: "Cleaner Deleted",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    const cleanersProfile = this.props.paginatedCleaners.filter(
+      (cleanersProfile) => cleanersProfile.id !== id
+    );
+    this.setState(() => ({
+      mappedCleaners: cleanersProfile.pagedItems,
+      modal: false,
+    }));
   };
 
   onDeleteError = () => {
     Swal.fire({
       icon: "error",
-      title: "Cleaner not deleted. Please try again...", 
+      title: "Cleaner not deleted. Please try again...",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -170,15 +170,16 @@ class ContactCleaners extends React.Component {
   };
 
   getNextPage = (paged) => {
-    this.props.getPaginatedCleaners(paged, this.state.pageSize)
-    .then(this.nextSuccess);
+    this.props
+      .getPaginatedCleaners(paged, this.state.pageSize)
+      .then(this.nextSuccess);
   };
- 
+
   nextSuccess = () => {
     const cleanersProfile = this.props.paginatedCleaners;
     this.setState({
       // imageLoaded: false,
-      mappedCleaners: cleanersProfile.pagedItems
+      mappedCleaners: cleanersProfile.pagedItems,
     });
   };
 
@@ -189,27 +190,28 @@ class ContactCleaners extends React.Component {
 
   toggleSearch = () => {
     this.setState({
-      searchBarShown: !this.state.searchBarShown
-    })
-  }
+      searchBarShown: !this.state.searchBarShown,
+    });
+  };
 
-  searchWithQuery = event => {
-    // console.log("searchWithQuery:", event.target.value );
+  searchWithQuery = (event) => {
     var value = event.target.value;
-    this.setState( () => ({ query: value }),
-      () => value === "" ?
-      this.setState({pageIndex: 0}, ()=> {
-        this.fetchPaginatedCleaners();
-      })
-      : "is 0"
-    )
-  }
+    this.setState(
+      () => ({ query: value }),
+      () =>
+        value === ""
+          ? this.setState({ pageIndex: 0 }, () => {
+              this.fetchPaginatedCleaners();
+            })
+          : "is 0"
+    );
+  };
 
   handleClickSearch = () => {
     this.setState(
       () => {
-        return{
-          initiatedSearch: true
+        return {
+          initiatedSearch: true,
         };
       },
       () => this.fetchPaginatedCleaners()
@@ -219,31 +221,31 @@ class ContactCleaners extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {/* <ContactHeading history={this.props.history}/> */}
         <div className="content-heading">
           Cleaners
           <div className="ml-auto">
-           <SearchContacts 
-           searchStarted={this.state.searchBarShown} 
-           toggleSearch={this.toggleSearch}
-           initialQuery={this.state.query}
-           onChangeSearch={this.searchWithQuery}
-           handleClickSearch={this.handleClickSearch}
-           />
-           
-            {" "}
-            <em
-              className="fa-1x mr-2 fas fa-user-plus"
-              onClick={this.submitNewCleaner}
-              style={{ cursor: "pointer" }}
-              data-toggle="tooltip"
-              title="Add Cleaner"
-            ></em>
+            <SearchContacts
+              searchStarted={this.state.searchBarShown}
+              toggleSearch={this.toggleSearch}
+              initialQuery={this.state.query}
+              onChangeSearch={this.searchWithQuery}
+              handleClickSearch={this.handleClickSearch}
+            />
+            {this.state.searchBarShown ? null : (
+              <em
+                className="fa-1x mr-2 fas fa-user-plus"
+                onClick={this.submitNewCleaner}
+                style={{ cursor: "pointer" }}
+                data-toggle="tooltip"
+                title="Add Cleaner"
+              ></em>
+            )}
           </div>
         </div>
 
         <div className="row">
           {this.state.mappedCleaners.map(this.mappedCleanersProfile)}
+        </div>
           <SingleCleanerView
             single={this.props.singleCleaner}
             isModal={this.state.modal}
@@ -251,7 +253,6 @@ class ContactCleaners extends React.Component {
             updateContact={this.updateSingleContact}
             deleteContact={this.deleteContactUserConfirmation}
           />
-        </div>
         <div style={{ padding: 25 }}>
           <Pagination
             onChange={this.onChange}
@@ -271,14 +272,13 @@ function mapStateToPros(store) {
     cleaners: store.cleaners,
     singleCleaner: store.singleCleaner,
     paginatedCleaners: store.paginatedCleaners,
-    searchedQuery: store.searchedQuery
+    searchedQuery: store.searchedQuery,
   };
 }
 
 export default connect(mapStateToPros, {
-  // getCleaners,
   getPaginatedCleaners,
   GetSingleCleaner,
   deleteCleaner,
-  getSearchPaginatedCleaners
+  getSearchPaginatedCleaners,
 })(ContactCleaners);

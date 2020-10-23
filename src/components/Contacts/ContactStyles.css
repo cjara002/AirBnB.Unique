@@ -34,26 +34,20 @@ background-color: #1B842C;
 color: white;   
 }
 */
-#contactMenu{
+#contactCardButtonArea{
 background-color: #133a26; 
 }
 
-/* 
-#menuShortcut{
-    color: #1B842C;  
-    background-color: #EAA220;   
-}
-*/
 #toggleButton{
-    color: #1B842C; 
+    color: #EAA220;
 }
 
 #subMenu{
-    background-color: #145f20;
+    background-color: #6c757d;
     color: #EAA220;
 }
-#subMenuIcon em + span{
-    color: #1B842C;
+#subMenuIcon em, #subMenuIcon span{
+    color: #EAA220;
 }
 
 .card {
@@ -72,17 +66,30 @@ background-color: #133a26;
     border-color: #EAA220;
     /* border-color: #d4af37 ;     */
 }
+#modalProfilePhoto {
+    height: 200px ;
+    border-radius: 500px ;
+    margin: 0 0.5em ;
+    background-color: transparent ;
+    border: solid ;
+    border-color: #EAA220;
+    box-shadow: 8px 6px 8px 1px #969696;
+    -webkit-box-shadow: 8px 6px 8px 1px #969696;
+}
 
 /* #menuDetials{
     align-content: center;
     position: relative;
 } */
 
-.container {
+/* .container {
     height: 300px;
     position: relative;
-    /* border: 3px solid green; */
-}
+} */
+/* .modalContainer {
+     height: 350px; 
+    position: relative;
+} */
 
 .verticalCenter {
     margin: 0;
@@ -92,6 +99,13 @@ background-color: #133a26;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+/* .modalCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+} */
 
 /* .content-heading {
     border-radius: 5%;
@@ -100,6 +114,7 @@ background-color: #133a26;
     text-align: center;
     color: #EAA220;
     background-color: #133a26;
+    width: 100%
 }
 
 #cleanerFormAddnUpdate{
@@ -107,6 +122,11 @@ background-color: #133a26;
     border-color: rgb(234, 162, 32); 
     background-color: rgb(19, 58, 38);
     color: white;
+}
+
+.SearchBarContactsBorder {
+    border: solid 2px; 
+    border-color: rgb(234, 162, 32); 
 }
 
 /* .labelContainer{
@@ -133,3 +153,12 @@ background-color: #133a26;
     border:1px solid red !important;
     box-shadow: 0 0 10px #719ECE !important;
 } */
+
+.rc-pagination-item-active {
+    background-color: #133a26 !important;
+    border-color: #133a26 !important;
+}
+
+.rc-pagination-item-active a {
+    color: #EAA220 !important;
+}

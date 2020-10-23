@@ -1,18 +1,17 @@
-import React from "react";
-import { Formik, Field } from "formik";
-import ContactFormSchema from "./ContactFormSchema";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { 
-   Form, FormGroup, Label } from "reactstrap";
 import { connect } from "react-redux";
+import ContactFormSchema from "./ContactFormSchema";
+import React from "react";
+import Swal from "sweetalert2";
+import Thumb from "./Thumb";
+import { Formik, Field } from "formik";
+import { Form, FormGroup, Label } from "reactstrap";
 import {
   addCleaner,
   GetSingleCleaner,
-  updateCleaner
+  updateCleaner,
 } from "../../Redux/Actions/Cleaners/cleanerAction";
-import Swal from "sweetalert2";
-import "./ContactStyles.css"
-import Thumb from "./Thumb"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./ContactStyles.css";
 
 class ContactFormPage extends React.Component {
   state = {
@@ -29,7 +28,7 @@ class ContactFormPage extends React.Component {
   componentDidMount() {
     if (this.props.match.params && this.props.match.params.id) {
       this.props.GetSingleCleaner(this.props.match.params.id);
-      this.setState(( ) => {
+      this.setState(() => {
         return {
           formData: {
             name: this.props.singleCleaner[0].name,
@@ -39,18 +38,18 @@ class ContactFormPage extends React.Component {
             description: this.props.singleCleaner[0].description,
             id: this.props.singleCleaner[0].id,
           },
-          isEditing: true
+          isEditing: true,
         };
       });
-    }
+    } 
   }
 
   handleSubmit = (values) => {
     if (!this.state.isEditing) {
       this.props
-      .addCleaner(values)
-      .then(this.addCleanerSuccess)
-      .catch(this.addCleanerError);
+        .addCleaner(values)
+        .then(this.addCleanerSuccess)
+        .catch(this.addCleanerError);
     } else {
       this.props
         .updateCleaner(values)
@@ -59,19 +58,18 @@ class ContactFormPage extends React.Component {
     }
   };
 
-
   addCleanerSuccess = () => {
     Swal.fire({
       position: "top-end",
       icon: "success",
-      title: "Cleaner Added", 
+      title: "Cleaner Added",
       showConfirmButton: false,
       timer: 1500,
       backdrop: `
       rgb(234, 162, 32, .5)
       left top
       no-repeat
-    `
+    `,
     });
     this.props.history.push("/cleaners");
   };
@@ -80,14 +78,14 @@ class ContactFormPage extends React.Component {
     Swal.fire({
       position: "top-end",
       icon: "error",
-      title: "Cleaner not added. Please try again...", 
+      title: "Cleaner not added. Please try again...",
       showConfirmButton: false,
       timer: 1500,
       backdrop: `
       rgb(234, 162, 32, .5)
       left top
       no-repeat
-    `
+    `,
     });
   };
 
@@ -95,14 +93,14 @@ class ContactFormPage extends React.Component {
     Swal.fire({
       position: "top-end",
       icon: "success",
-      title: "Cleaner Updated", 
+      title: "Cleaner Updated",
       showConfirmButton: false,
       timer: 1500,
       backdrop: `
       rgb(234, 162, 32, .5)
       left top
       no-repeat
-    `
+    `,
     });
     this.props.history.push("/cleaners");
   };
@@ -111,14 +109,14 @@ class ContactFormPage extends React.Component {
     Swal.fire({
       position: "top-end",
       icon: "error",
-      title: "Cleaner not updated. Please try again...", 
+      title: "Cleaner not updated. Please try again...",
       showConfirmButton: false,
       timer: 1500,
       backdrop: `
       rgb(234, 162, 32, .5)
       left top
       no-repeat
-    `
+    `,
     });
   };
 
@@ -144,8 +142,6 @@ class ContactFormPage extends React.Component {
   //   }
   // }
 
-  
-
   render() {
     return (
       <React.Fragment>
@@ -163,18 +159,20 @@ class ContactFormPage extends React.Component {
               handleSubmit,
               isValid,
               isSubmitting,
+              // isEditing,
               // setFieldValue,
               // render
             } = props;
             return (
               <div className="content-wrapper">
-                <h1 id="formCleanerTitle">{this.isEditing? "Update Cleaner" : "Add Cleaner" }</h1>
-                <div className="col-6">
-                  <Form
-                    onSubmit={handleSubmit}
-                    id="cleanerFormAddnUpdate"
-                  >
-                    <FormGroup row>
+                <div className="row">
+                  <div className="col-3"></div>
+                  <div className="col-6">
+                  <h1 id="formCleanerTitle">
+                  {this.state.isEditing ? "Update Cleaner" : "Add Cleaner"}
+                </h1>
+                    <Form onSubmit={handleSubmit} id="cleanerFormAddnUpdate">
+                      <FormGroup row>
                         <Label className="labelContainer">Name </Label>
                         <Field
                           name="name"
@@ -188,20 +186,25 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.name && touched.name && (
-                          <span className="input-feedback text-danger" id="feedbackFormat">
+                          <span
+                            className="input-feedback text-danger"
+                            id="feedbackFormat"
+                          >
                             {errors.name}
                           </span>
                         )}
-                    </FormGroup>
-
-                    <FormGroup row>
-                        <Label className="labelContainer">Years In Operation </Label>
+                      </FormGroup>
+  
+                      <FormGroup row>
+                        <Label className="labelContainer">
+                          Years In Operation{" "}
+                        </Label>
                         <Field
                           name="yearsinoperation"
                           type="number"
                           value={values.yearsinoperation}
                           // value={this.state.formData.yearsinoperation}
-                        
+  
                           className={
                             errors.yearsinoperation && touched.yearsinoperation
                               ? "form-control error"
@@ -209,16 +212,19 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.yearsinoperation && touched.yearsinoperation && (
-                          <span className="input-feedback text-danger" id="feedbackFormat">
+                          <span
+                            className="input-feedback text-danger"
+                            id="feedbackFormat"
+                          >
                             {errors.yearsinoperation}
                           </span>
                         )}
-                    </FormGroup>
+                      </FormGroup>
   
-                    <FormGroup row>
+                      <FormGroup row>
                         <Label className="labelContainer"> Choose Image</Label>
                         <Field
-                        // id="fieldContainer"
+                          // id="fieldContainer"
                           name="imageurl"
                           type="text"
                           value={values.imageurl}
@@ -229,47 +235,50 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.imageurl && touched.imageurl && (
-                          <span className="input-feedback text-danger " id="feedbackFormat">
+                          <span
+                            className="input-feedback text-danger "
+                            id="feedbackFormat"
+                          >
                             {errors.imageurl}
                           </span>
                         )}
                         {/* <input
-                        // id="fieldContainer"
-                          name="imageurl"
-                          type="file"
-                          // value={this.state.formData.imageurl}
-                          // value={values.imageurl.name}
-                        //   value={(event) => {
-                        //     console.log("Image Upload", event.currentTarget.files[0] )
-                        //     setFieldValue("values.imageurl", event.currentTarget.files[0]);
-                        //   }
-                        // }
-                          // onChange={(event) => {
-                          //   console.log("Image Upload", event.currentTarget.files[0] )
-                          //   setFieldValue("file", event.currentTarget.files[0]);
-                          // }}
-                          onChange={(event) => {
-                            console.log("Image Upload", event.currentTarget.files[0] )
-
-                            // setFieldValue("imageurl", event.currentTarget.files[0]);
-                          }}
-                          // onChange={(event) => this.onChangeImageUpload(event)}
-                          className={
-                            errors.imageurl && touched.imageurl
-                              ? "form-control error"
-                              : "form-control"
-                          }
-                        />
-                        {errors.imageurl && touched.imageurl && (
-                          <span className="input-feedback text-danger " id="feedbackFormat">
-                            {errors.imageurl}
-                          </span>
-                        )} */}
-
-                       <Thumb file={values.imageurl} />
-                    </FormGroup>
+                          // id="fieldContainer"
+                            name="imageurl"
+                            type="file"
+                            // value={this.state.formData.imageurl}
+                            // value={values.imageurl.name}
+                          //   value={(event) => {
+                          //     console.log("Image Upload", event.currentTarget.files[0] )
+                          //     setFieldValue("values.imageurl", event.currentTarget.files[0]);
+                          //   }
+                          // }
+                            // onChange={(event) => {
+                            //   console.log("Image Upload", event.currentTarget.files[0] )
+                            //   setFieldValue("file", event.currentTarget.files[0]);
+                            // }}
+                            onChange={(event) => {
+                              console.log("Image Upload", event.currentTarget.files[0] )
   
-                    <FormGroup row>
+                              // setFieldValue("imageurl", event.currentTarget.files[0]);
+                            }}
+                            // onChange={(event) => this.onChangeImageUpload(event)}
+                            className={
+                              errors.imageurl && touched.imageurl
+                                ? "form-control error"
+                                : "form-control"
+                            }
+                          />
+                          {errors.imageurl && touched.imageurl && (
+                            <span className="input-feedback text-danger " id="feedbackFormat">
+                              {errors.imageurl}
+                            </span>
+                          )} */}
+  
+                        <Thumb file={values.imageurl} />
+                      </FormGroup>
+  
+                      <FormGroup row>
                         <Label className="labelContainer">City </Label>
                         <Field
                           name="city"
@@ -282,15 +291,16 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.city && touched.city && (
-                          <span className="input-feedback text-danger" id="feedbackFormat">
+                          <span
+                            className="input-feedback text-danger"
+                            id="feedbackFormat"
+                          >
                             {errors.city}
                           </span>
                         )}
-                        
-
-                    </FormGroup>
+                      </FormGroup>
   
-                    <FormGroup row>
+                      <FormGroup row>
                         <Label className="labelContainer">Description </Label>
                         <Field
                           name="description"
@@ -305,42 +315,45 @@ class ContactFormPage extends React.Component {
                           }
                         />
                         {errors.description && touched.description && (
-                          <span className="input-feedback text-danger" id="feedbackFormat">
+                          <span
+                            className="input-feedback text-danger"
+                            id="feedbackFormat"
+                          >
                             {errors.description}
                           </span>
                         )}
-                    </FormGroup>
+                      </FormGroup>
   
-                    {/* <FormGroup style={{ textAlign: "right", padding: "10px" }}> */}
-                    <FormGroup>
-                      <button
-                        className="btn btn-outline-custom text-white"
-                        // id="faqCancel"
-                        type="submit"
-                        onClick={this.onCancel}
-                      >
-                        Cancel
-                      </button>
-  
-                      {this.state.isEditing ? (
+                      <FormGroup>
                         <button
                           className="btn btn-outline-custom text-white"
                           type="submit"
-                          disabled={!isValid || isSubmitting}
+                          onClick={this.onCancel}
                         >
-                          Update
+                          Cancel
                         </button>
-                      ) : (
-                        <button
-                          className="btn btn-outline-custom text-white"
-                          type="submit"
-                          disabled={!isValid || isSubmitting}
-                        >
-                          Add
-                        </button>
-                      )}
-                    </FormGroup>
-                  </Form>
+  
+                        {this.state.isEditing ? (
+                          <button
+                            className="btn btn-outline-custom text-white"
+                            type="submit"
+                            disabled={!isValid || isSubmitting}
+                          >
+                            Update
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-outline-custom text-white"
+                            type="submit"
+                            disabled={!isValid || isSubmitting}
+                          >
+                            Add
+                          </button>
+                        )}
+                      </FormGroup>
+                    </Form>
+                  </div>
+                  <div className="col-3"></div>
                 </div>
               </div>
             );
@@ -353,9 +366,12 @@ class ContactFormPage extends React.Component {
 
 function mapStateToPros(store) {
   return {
-    singleCleaner: store.singleCleaner
+    singleCleaner: store.singleCleaner,
   };
 }
 
-export default connect(mapStateToPros, { addCleaner, GetSingleCleaner, updateCleaner })(ContactFormPage);
-// export default connect(null, { addCleaner, GetSingleCleaner })(ContactFormPage);
+export default connect(mapStateToPros, {
+  addCleaner,
+  GetSingleCleaner,
+  updateCleaner,
+})(ContactFormPage);
