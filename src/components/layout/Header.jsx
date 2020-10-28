@@ -32,25 +32,12 @@ class Header extends Component {
                 <small className="ml-2 text-white"> Making every expierence 
                 &nbsp;
                 <span className="headerRainbow">UNIQUE</span>
-                {/* <span>U</span>
-                <span>N</span>
-                <span>I</span>
-                <span>Q</span>
-                <span>U</span>
-                <span>U</span> */}
                 </small>
               </div>
             </span>
-
-            {/* <div className="brand-logo-collapsed">
-                <img
-                  className="img-fluid"
-                  src={UniqueTest}
-                  alt="App Logo"
-                />
-              </div> */}
           </div>
           {/* END navbar header */}
+          
           <ul className="navbar-nav flex-row">
           <li className="nav-item">
               <a
