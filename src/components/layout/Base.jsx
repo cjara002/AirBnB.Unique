@@ -1,17 +1,30 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import SideBar from "./SideBar";
 
-const Base = props => {
-return (
-    <div className="wrapper">
-        <Header />
+class Base extends React.Component {
+  state = {
+    setSidebar: false,
+  };
 
-        <section className="section-container">{props.children}</section>
+  showSidebar = () => {
+    this.setState((prevState) => {
+      return {
+        setSidebar: !prevState.setSidebar,
+      };
+    });
+  };
+  render() {
+    return (
+      <div className="wrapper">
+        <Header triggershowSidebar={this.showSidebar} />
+
+        <SideBar showSidebar={this.state.setSidebar} />
+        <section className="section-container">{this.props.children}</section>
         <Footer />
-
-    </div>
-)
+      </div>
+    );
+  }
 }
-
 export default Base;

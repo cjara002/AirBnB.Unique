@@ -18,9 +18,7 @@ class SingleCleanerView extends React.Component {
     return (
       <React.Fragment>
         <Modal isOpen={this.props.isModal}>
-          <ModalHeader toggle={this.props.toggle}>
-            <div>{this.props.single[0] && this.props.single[0].name}</div>
-          </ModalHeader>
+          <ModalHeader toggle={this.props.toggle}></ModalHeader>
           <ModalBody>
             {/* Start of menu */}
             <div className="ml-auto">
@@ -64,10 +62,7 @@ class SingleCleanerView extends React.Component {
                     }
                   >
                     <em className="fa-fw fa fa-plus mr-2" />
-                    <span
-                    >
-                      Edit Cleaner
-                    </span>
+                    <span>Edit Cleaner</span>
                   </button>
 
                   <button
@@ -83,67 +78,90 @@ class SingleCleanerView extends React.Component {
                     <span>Delete Cleaner</span>
                   </button>
 
-                  {/* <button
-                          type="button"
-                          tabIndex={0}
-                          className="dropdown-item"
-                          id="subMenuIcon"
-                        >
-                          <em className="fa-fw fas fa-share mr-2" />
-                          <span>Share contact</span>
-                        </button> */}
+                  <button
+                    type="button"
+                    tabIndex={0}
+                    className="dropdown-item"
+                    id="subMenuIcon"
+                    // onClick={() =>
+                    //   this.props.deleteContact(this.props.single[0])
+                    // }
+                  >
+                    <em className="fa-fw fas fa-share mr-2" />
+                    <span>Share Cleaner</span>
+                  </button>
                 </div>
               </div>
             </div>
             {/* End of menu */}
 
             <div className="row">
-            {/* <div className="modalContainer"> */}
-            <div className="col-2"></div>
-              <div className="col-10" style={{ alignItems: "center"}}>
-              {/* <div className="modalCenter"> */}
-                <img
-                  className=" mb-2 rounded-circle-thumb32"
-                  src={this.props.single[0] && this.props.single[0].imageUrl}
-                  alt="Contact"
-                  id="modalProfilePhoto"
-                />
-                <h5>
-                  {" "}
-                  {this.props.single[0] && this.props.single[0].city}
-                </h5>
-                        
-                  <p>
-                    {this.props.single[0] && this.props.single[0].description}
+              <div className="col-2"></div>
+              <div className="col-8" style={{ alignItems: "center" }}>
+                <div className="d-flex align-items-center mb-3">
+                  <img
+                    className="mr-3 rounded-circle thumb48"
+                    src={this.props.single[0] && this.props.single[0].imageUrl}
+                    alt="Contact"
+                    id="modalProfilePhoto"
+                  />
+                  <p className="m-0">
+                    <a href>
+                      <strong className="nameStrongModal">
+                        {this.props.single[0] && this.props.single[0].name}
+                      </strong>
+                    </a>
+                    <br />
+                    Email here
                   </p>
-                <span>
-                  Years in operation:{" "}
-                  {this.props.single[0] &&
-                    this.props.single[0].yearsInOperation}
-                </span>
+                </div>
+
+                  <div className="row row-flush">
+                    <div
+                      className="col-6 d-md-block py-2 text-center br"
+                      id="itemSeparator"
+                    >
+                      <div className="text-muted text-md">
+                        <em className="fas fa-map-pin" />
+                      </div>
+                      <div className="text-sm" id="innerModalDetailsText">
+                        {this.props.single[0] && this.props.single[0].city}
+                      </div>
+                      <div className="text-muted">CITY</div>
+                    </div>
+  
+                    <div
+                      className="col-6  d-md-block py-2 text-center br"
+                      // id="itemSeparator2"
+                    >
+                      <div className="text-muted text-md">
+                        <em className="fas fa-user-check" />
+                      </div>
+                      <div className=" text-sm" id="innerModalDetailsText">
+                        {this.props.single[0] &&
+                          this.props.single[0].yearsInOperation}
+                      </div>
+                      <div className="text-muted">YEARS</div>
+                    </div>
+               </div>
+
+                <p>
+                  {this.props.single[0] && this.props.single[0].description}
+                </p>
               </div>
               <div className="col-2"></div>
             </div>
           </ModalBody>
           <ModalFooter>
             {/* Button does not work for now */}
-                    <Button
-                      color="dark"
-                      type="submit"
-                    >
-                      Book Now
-                    </Button>
-                  </ModalFooter>
+            <Button color="dark" type="submit">
+              Book Now
+            </Button>
+          </ModalFooter>
         </Modal>
       </React.Fragment>
     );
   }
 }
 
-// function mapStateToProps(store) {
-//   return {
-//     singleCleaner: store.singleCleaner
-//   }
-// }
-// export default connect(mapStateToProps, { GetSingleCleaner })(SingleCleanerView);
 export default SingleCleanerView;

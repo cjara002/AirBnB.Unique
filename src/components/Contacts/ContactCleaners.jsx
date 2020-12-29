@@ -23,9 +23,9 @@ class ContactCleaners extends React.Component {
     modal: false,
     pageIndex: 0,
     pageSize: 3,
-    totalCount: 9,
-    totalPages: 9,
-    imageLoaded: false,
+    totalCount: 0,
+    totalPages: 0,
+    profileLoaded: false,
     initiatedSearch: false,
     query: "",
     searchBarShown: false,
@@ -51,9 +51,9 @@ class ContactCleaners extends React.Component {
   getPaginatedCleanersSuccess = () => {
     const cleanersProfile = this.props.paginatedCleaners;
     this.setState(() => ({
-      imageLoaded: true,
-      // totalCount: cleanersProfile.totalCount,
-      // totalPages: cleanersProfile.totalPages,
+      profileLoaded: true,
+      totalCount: cleanersProfile.totalCount,
+      totalPages: cleanersProfile.totalPages,
       pageIndex: cleanersProfile.pageIndex,
       pageSize: cleanersProfile.pageSize,
       mappedCleaners: cleanersProfile.pagedItems,
@@ -67,9 +67,9 @@ class ContactCleaners extends React.Component {
   getSearchPaginatedCleanersSuccess = () => {
     const searchedQuery = this.props.searchedQuery;
     this.setState(() => ({
-      imageLoaded: true,
-      // totalCount: searchedQuery.totalCount,
-      // totalPages: searchedQuery.totalPages,
+      profileLoaded: true,
+      totalCount: searchedQuery.totalCount,
+      totalPages: searchedQuery.totalPages,
       pageIndex: searchedQuery.pageIndex,
       pageSize: searchedQuery.pageSize,
       mappedCleaners: searchedQuery.pagedItems,
@@ -154,7 +154,7 @@ class ContactCleaners extends React.Component {
         pagCleaner={mappedCleaners}
         key={mappedCleaners.id}
         triggershowModal={this.showModal}
-        isProfileLoaded={this.state.imageLoaded}
+        isProfileLoaded={this.state.profileLoaded}
       />
     );
   };
@@ -178,7 +178,7 @@ class ContactCleaners extends React.Component {
   nextSuccess = () => {
     const cleanersProfile = this.props.paginatedCleaners;
     this.setState({
-      // imageLoaded: false,
+      // profileLoaded: false,
       mappedCleaners: cleanersProfile.pagedItems,
     });
   };
@@ -246,13 +246,13 @@ class ContactCleaners extends React.Component {
         <div className="row">
           {this.state.mappedCleaners.map(this.mappedCleanersProfile)}
         </div>
-          <SingleCleanerView
-            single={this.props.singleCleaner}
-            isModal={this.state.modal}
-            toggle={this.toggle}
-            updateContact={this.updateSingleContact}
-            deleteContact={this.deleteContactUserConfirmation}
-          />
+        <SingleCleanerView
+          single={this.props.singleCleaner}
+          isModal={this.state.modal}
+          toggle={this.toggle}
+          updateContact={this.updateSingleContact}
+          deleteContact={this.deleteContactUserConfirmation}
+        />
         <div style={{ padding: 25 }}>
           <Pagination
             onChange={this.onChange}
@@ -267,7 +267,7 @@ class ContactCleaners extends React.Component {
   }
 }
 
-function mapStateToPros(store) {
+function mapStateToProps(store) {
   return {
     cleaners: store.cleaners,
     singleCleaner: store.singleCleaner,
@@ -276,7 +276,7 @@ function mapStateToPros(store) {
   };
 }
 
-export default connect(mapStateToPros, {
+export default connect(mapStateToProps, {
   getPaginatedCleaners,
   GetSingleCleaner,
   deleteCleaner,

@@ -27,21 +27,25 @@ class ContactFormPage extends React.Component {
 
   componentDidMount() {
     if (this.props.match.params && this.props.match.params.id) {
-      this.props.GetSingleCleaner(this.props.match.params.id);
-      this.setState(() => {
-        return {
-          formData: {
-            name: this.props.singleCleaner[0].name,
-            yearsinoperation: this.props.singleCleaner[0].yearsInOperation,
-            imageurl: this.props.singleCleaner[0].imageUrl,
-            city: this.props.singleCleaner[0].city,
-            description: this.props.singleCleaner[0].description,
-            id: this.props.singleCleaner[0].id,
-          },
-          isEditing: true,
-        };
-      });
+      this.props.GetSingleCleaner(this.props.match.params.id)
+      .then(this.GetSingleCleanerSuccess)
     } 
+  }
+
+  GetSingleCleanerSuccess = () =>{
+    this.setState(() => {
+      return {
+        formData: {
+          name: this.props.singleCleaner.name,
+          yearsinoperation: this.props.singleCleaner.yearsInOperation,
+          imageurl: this.props.singleCleaner.imageUrl,
+          city: this.props.singleCleaner.city,
+          description: this.props.singleCleaner.description,
+          id: this.props.singleCleaner.id,
+        },
+        isEditing: true,
+      };
+    });
   }
 
   handleSubmit = (values) => {
@@ -178,7 +182,6 @@ class ContactFormPage extends React.Component {
                           name="name"
                           type="text"
                           value={values.name}
-                          // value={this.state.formData.name}
                           className={
                             errors.name && touched.name
                               ? "form-control error"
@@ -203,7 +206,6 @@ class ContactFormPage extends React.Component {
                           name="yearsinoperation"
                           type="number"
                           value={values.yearsinoperation}
-                          // value={this.state.formData.yearsinoperation}
   
                           className={
                             errors.yearsinoperation && touched.yearsinoperation
@@ -224,7 +226,6 @@ class ContactFormPage extends React.Component {
                       <FormGroup row>
                         <Label className="labelContainer"> Choose Image</Label>
                         <Field
-                          // id="fieldContainer"
                           name="imageurl"
                           type="text"
                           value={values.imageurl}
@@ -242,38 +243,6 @@ class ContactFormPage extends React.Component {
                             {errors.imageurl}
                           </span>
                         )}
-                        {/* <input
-                          // id="fieldContainer"
-                            name="imageurl"
-                            type="file"
-                            // value={this.state.formData.imageurl}
-                            // value={values.imageurl.name}
-                          //   value={(event) => {
-                          //     console.log("Image Upload", event.currentTarget.files[0] )
-                          //     setFieldValue("values.imageurl", event.currentTarget.files[0]);
-                          //   }
-                          // }
-                            // onChange={(event) => {
-                            //   console.log("Image Upload", event.currentTarget.files[0] )
-                            //   setFieldValue("file", event.currentTarget.files[0]);
-                            // }}
-                            onChange={(event) => {
-                              console.log("Image Upload", event.currentTarget.files[0] )
-  
-                              // setFieldValue("imageurl", event.currentTarget.files[0]);
-                            }}
-                            // onChange={(event) => this.onChangeImageUpload(event)}
-                            className={
-                              errors.imageurl && touched.imageurl
-                                ? "form-control error"
-                                : "form-control"
-                            }
-                          />
-                          {errors.imageurl && touched.imageurl && (
-                            <span className="input-feedback text-danger " id="feedbackFormat">
-                              {errors.imageurl}
-                            </span>
-                          )} */}
   
                         <Thumb file={values.imageurl} />
                       </FormGroup>
@@ -283,7 +252,6 @@ class ContactFormPage extends React.Component {
                         <Field
                           name="city"
                           value={values.city}
-                          // value={this.state.formData.city}
                           className={
                             errors.city && touched.city
                               ? "form-control error"
@@ -307,7 +275,6 @@ class ContactFormPage extends React.Component {
                           component="textarea"
                           rows="5"
                           value={values.description}
-                          // value={this.state.formData.description}
                           className={
                             errors.description && touched.description
                               ? "form-control error"
@@ -364,13 +331,13 @@ class ContactFormPage extends React.Component {
   }
 }
 
-function mapStateToPros(store) {
+function mapStateToProps(store) {
   return {
-    singleCleaner: store.singleCleaner,
+    singleCleaner: store.singleCleaner[0],
   };
 }
 
-export default connect(mapStateToPros, {
+export default connect(mapStateToProps, {
   addCleaner,
   GetSingleCleaner,
   updateCleaner,
