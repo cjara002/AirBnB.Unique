@@ -1,164 +1,134 @@
+/* ========================================================================
+Contact.jsx 
+ ========================================================================== */
 .content-wrapper {
-    padding: 20px;
+  padding: 20px;
 }
-
-.img-fluid {
-    max-width: 50%;
-    height: auto;
-}
+/* ========================================================================
+ContactCleaners.jsx 
+ ========================================================================== */
 .content-wrapper .content-heading {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    font-size: 1.5rem;
-    line-height: 1.1;
-    color: #EAA220;
-    margin: -15px -15px 20px;
-    padding: 15px;
-    /* font-weight: 400; */
-    background-color: #133a26;
-    /* border-bottom: 1px solid #cfdbe2; */
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: #eaa220;
+  margin: -15px -15px 20px;
+  padding: 15px;
+  background-color: #133a26;
 }
-
+/* ========================================================================
+SearchContacts.jsx 
+ ========================================================================== */
+.SearchBarContactsBorder {
+  border: solid 2px;
+  border-color: rgb(234, 162, 32);
+}
+/* ========================================================================
+SingleCleanerProfile.jsx 
+ ========================================================================== */
+#contactCardButtonArea {
+  background-color: #133a26;
+}
 #contactCard {
-background-color: #133a26; 
-/* color: #EAA220;    */
+  background-color: #133a26;
 }
-#contactCard h4{
-/* background-color: #1B842C;  */
-color: #EAA220;   
+#contactCard h4 {
+  color: #eaa220;
 }
-/* #contactCard h5,span{
-background-color: #1B842C;  
-color: white;   
+.imageContainer {
+  height: 250px;
+  overflow: hidden;
 }
-*/
-#contactCardButtonArea{
-background-color: #133a26; 
-}
-
-#toggleButton{
-    color: #EAA220;
-}
-
-#subMenu{
-    background-color: #6c757d;
-    color: #EAA220;
-}
-#subMenuIcon em, #subMenuIcon span{
-    color: #EAA220;
-}
-
-.card {
-    margin-bottom: 1.25rem;
-}
-
 #profilePhoto {
-    /* display: inline-block ; */
-    /* width: 7px ; */
-    height: 200px ;
-    border-radius: 500px ;
-    margin: 0 0.5em ;
-    background-color: transparent ;
-    /* vertical-align: baseline ; */
-    border: solid ;
-    border-color: #EAA220;
-    /* border-color: #d4af37 ;     */
+  width: 40%;
+  height: 100%;
+  border-radius: 50%;
+  margin: 0 0.5em;
+  border: solid;
+  border-color: #eaa220;
+}
+
+/* ========================================================================
+SingleCleanerView.jsx 
+ ========================================================================== */
+#toggleButton {
+  color: #eaa220;
+}
+#subMenu {
+  background-color: #6c757d;
+  color: #eaa220;
+}
+#subMenuIcon em,
+#subMenuIcon span {
+  color: #eaa220;
 }
 #modalProfilePhoto {
-    height: 200px ;
-    border-radius: 500px ;
-    margin: 0 0.5em ;
-    background-color: transparent ;
-    border: solid ;
-    border-color: #EAA220;
-    box-shadow: 8px 6px 8px 1px #969696;
-    -webkit-box-shadow: 8px 6px 8px 1px #969696;
+  width: 20%;
+  height: 50%;
+  border-radius: 500px;
+  margin: 0 0.5em;
+  background-color: transparent;
+  box-shadow: 8px 6px 8px 1px #969696;
+  -webkit-box-shadow: 8px 6px 8px 1px #969696;
+}
+.nameStrongModal {
+  font-size: 2.5rem;
+}
+#itemSeparator {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 0;
+  padding-right: 0;
 }
 
-/* #menuDetials{
-    align-content: center;
-    position: relative;
-} */
-
-/* .container {
-    height: 300px;
-    position: relative;
-} */
-/* .modalContainer {
-     height: 350px; 
-    position: relative;
-} */
-
-.verticalCenter {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+#innerModalDetailsText {
+  color: #eaa220;
 }
-/* .modalCenter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-} */
 
-/* .content-heading {
-    border-radius: 5%;
-} */
+/* #itemSeparator2 {
+  border-right: 1px solid rgba(0,0,0,0.1); 
+  padding-left: 0;
+  padding-right: 0;
+   text-align: center;
+   padding: 10px;    
+}
+*/
+
+/* ========================================================================
+ContactFormPage.jsx 
+ ========================================================================== */
 #formCleanerTitle {
-    text-align: center;
-    color: #EAA220;
-    background-color: #133a26;
-    width: 100%
+  text-align: center;
+  color: #eaa220;
+  background-color: #133a26;
+  width: 100%;
 }
 
-#cleanerFormAddnUpdate{
-    border: solid; 
-    border-color: rgb(234, 162, 32); 
-    background-color: rgb(19, 58, 38);
-    color: white;
+#cleanerFormAddnUpdate {
+  border: solid;
+  border-color: rgb(234, 162, 32);
+  background-color: rgb(19, 58, 38);
+  color: white;
 }
-
-.SearchBarContactsBorder {
-    border: solid 2px; 
-    border-color: rgb(234, 162, 32); 
-}
-
-/* .labelContainer{
-    text-align: center;
-} */
-
 .labelContainer {
-    /* display: inline-block;  */
-    width: 100%;
-    /* display: inline-block; */
-  /* vertical-align: middle; */
+  width: 100%;
   text-align: center;
-  }
+}
 #feedbackFormat {
-    /* display: inline-block;  */
-    width: 100%;
-    /* display: inline-block; */
-  /* vertical-align: middle; */
+  width: 100%;
   text-align: center;
-  }
-
-  /* #fieldContainer {
-    outline: none !important;
-    border:1px solid red !important;
-    box-shadow: 0 0 10px #719ECE !important;
-} */
+}
+/* ========================================================================
+RC pagination 
+ ========================================================================== */
 
 .rc-pagination-item-active {
-    background-color: #133a26 !important;
-    border-color: #133a26 !important;
+  background-color: #133a26 !important;
+  border-color: #133a26 !important;
 }
 
 .rc-pagination-item-active a {
-    color: #EAA220 !important;
+  color: #eaa220 !important;
 }
