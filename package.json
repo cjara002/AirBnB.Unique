@@ -5,7 +5,7 @@
   "homepage": "https://cjara002.github.io/AirBnB.Unique",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "formik": "^2.1.1",
     "gh-pages": "^2.2.0",
