@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import SideBar from "./SideBar";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class Base extends React.Component {
   state = {
@@ -17,8 +18,10 @@ class Base extends React.Component {
   };
   render() {
     return (
-      <div className="wrapper">
-        <Header triggershowSidebar={this.showSidebar} />
+      <div className="main-wrapper">
+        {/* <div className="container"> */}
+          <Header triggershowSidebar={this.showSidebar} />
+        {/* </div> */}
 
         <SideBar showSidebar={this.state.setSidebar} />
         <section className="section-container">{this.props.children}</section>

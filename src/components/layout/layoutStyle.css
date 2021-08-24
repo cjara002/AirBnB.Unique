@@ -55,6 +55,14 @@ Header.jsx
   display: inline-block !important;
   padding-left: 60% !important;
 }
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #9a8c67;
+}
 /* ========================================================================
 SideBar.jsx 
  ========================================================================== */
