@@ -62,7 +62,8 @@ class AppRoutes extends React.Component {
     //     listofPages.includes(newPath)
     // )
     // {
-    content = this.getCleanerContact();
+    // content = this.getCleanerContact();
+    content = this.getPublicContent();
     // }
 
     // {
