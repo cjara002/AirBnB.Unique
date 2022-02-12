@@ -9,6 +9,11 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Table from "./images/cleanTable.jpg";
 import testimonials from "./content/testimonials";
+import CleanMint from "./images/cleanMint.jpg";
+import Task from "./images/task.png";
+import Green  from "./images/green.png";
+import Mobile from "./images/mobile.png";
+import Training from "./images/training.png";
 
 class AirbnbUnique extends React.Component {
   render() {
@@ -137,35 +142,40 @@ class AirbnbUnique extends React.Component {
           <section className="pb-0 overflow-visible bg-light">
             <div className="container">
               <div className="mb-5 text-center">
-                <span class="text-uppercase text-primary small font-weight-700 letter-spacing-1 mb-2 d-block">
-                  testimonial
-                </span>
-                <h2 class="h1 mb-0">What our clients rave about</h2>
+                <h2 className="h1 mb-0">What our clients rave about</h2>
               </div>
               <div
-                class="bg-img cover-background py-5 py-lg-8 px-4 testimonial-style3 rounded"
+                className="bg-img cover-background py-5 py-lg-8 px-4 testimonial-style3 rounded"
                 data-overlay-light="9"
                 style={{ backgroundImage: `url(${Table})` }}
               >
-                <div class="owl-carousel owl-theme" id="testmonials-carousel">
+                <div
+                  className="owl-carousel owl-theme"
+                  id="testmonials-carousel"
+                >
                   <Slider {...settings}>
                     {testimonials.map((test, index) => (
-                      <div className="testmonial-single text-center" key={index}>
+                      <div
+                        className="testmonial-single text-center"
+                        key={index}
+                      >
                         <img
                           src={test.img}
                           alt="..."
-                          className="rounded-circle"
+                          className="rounded-circle testImage"
                         />
-                        <span className="h1 align-top d-block my-4">
-                          <i className="ti-quote-left"></i>
-                        </span>
+                        {/* <span className="h1 align-top d-block my-4">
+                        <i className="fa-quote-left"></i>
+                        </span> */}
                         <p className="display-29 display-md-28 mb-4 w-lg-85 w-xl-70 mx-auto">
                           {test.recommedation}
                         </p>
                         <h6 className="letter-spacing-1 text-primary">
                           {test.name}
                         </h6>
-                        <span className="mb-0  letter-spacing-2">{test.title}</span>
+                        <span className="mb-0  letter-spacing-2">
+                          {test.title}
+                        </span>
                       </div>
                     ))}
                   </Slider>
@@ -174,6 +184,63 @@ class AirbnbUnique extends React.Component {
             </div>
           </section>
           {/* testimonials end */}
+          <br />
+          <br />
+          <section
+            className="parallax"
+            data-overlay-dark={2}
+            style={{ backgroundImage: `url(${CleanMint})` }}
+          >
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-7 col-xl-6">
+                  <div className="bg-white p-2-2 p-sm-5 rounded">
+                    <span className="text-uppercase text-primary small font-weight-700 letter-spacing-1 d-block mb-2">
+                      see the difference
+                    </span>
+                    <h2 className="h1 mb-2-4 mb-sm-5">Why choose us?</h2>
+                    <div className="media mb-2-0">
+                      <img src={Task} alt="..." />
+                      <div className="media-body ml-4">
+                        <h4 className="h6 text-primary">Customize tasks for cleaners</h4>
+                        <p className="mb-0">
+                          Make task according to the needs of each of your properties. Keep our cleaners in the loop!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="media mb-2-0">
+                      <img src={Green} alt="..." />
+                      <div className="media-body ml-4">
+                        <h4 className="h6 text-primary">Non-toxic cleaning products</h4>
+                        <p className="mb-0">
+                          We know that not all products are made the same. We use the best in the industry while keeping out guest in mind. 
+                        </p>
+                      </div>
+                    </div>
+                    <div className="media">
+                      <img src={Mobile} alt="..." />
+                      <div className="media-body ml-4">
+                        <h4 className="h6 text-primary">Effortless Booking</h4>
+                        <p className="mb-0">
+                          Our platform makes it easy to find and book a local cleaner.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="media">
+                      <img src={Training} alt="..." />
+                      <div className="media-body ml-4">
+                        <h4 className="h6 text-primary">Streamlined training</h4>
+                        <p className="mb-0">
+                          We strive to be the best by staying ahead of the industry. Our cleaners have the tools to 
+                          exceed expectations. 
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </React.Fragment>
     );

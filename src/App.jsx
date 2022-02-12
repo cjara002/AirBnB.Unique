@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import store from "./Store";
 import React from "react";
 import { withRouter } from "react-router-dom";
+// import 'font-awesome/css/font-awesome.min.css';
 
 class App extends React.Component {
 
