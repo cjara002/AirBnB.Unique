@@ -1,6 +1,5 @@
 import React from "react";
 import "./landingPageStyle.css";
-import uniqueLogo from "./images/UniqueLogo.jpg";
 // import HeaderDropDown from "./headerDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cleaning from "./images/cleaningBus.jpg";
@@ -14,6 +13,7 @@ import Task from "./images/task.png";
 import Green  from "./images/green.png";
 import Mobile from "./images/mobile.png";
 import Training from "./images/training.png";
+import Header from "./header/Header";
 
 class AirbnbUnique extends React.Component {
   render() {
@@ -29,74 +29,7 @@ class AirbnbUnique extends React.Component {
     return (
       <React.Fragment>
         <div className="main-wrapper">
-          <header className="header-style header-custom">
-            <div className="container">
-              <div className="navbar-header navbar-header-custom row">
-                <div className="col-lg-3">
-                  <a
-                    href="#!"
-                    className="navbar-brand xs-width-145 px d-inline-block no transition"
-                  >
-                    <img id="logo" src={uniqueLogo} alt="logo" />
-                  </a>
-                </div>
-
-                <div className="col-lg-9 col-xl-8 offset-xl-1 offset-lg-0 d-none d-lg-block">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="media">
-                        <i className="ti-time header-icon3 text-primary"></i>
-                        <div className="media-body ml-3">
-                          <span className="font-weight-600 d-bloack display-30 text-white">
-                            EMAIL
-                          </span>
-                          <span className="font-weight-500 display-30 d-block text-white">
-                            info@mockemail.com
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="navbar-default">
-              <div className="menu_area alt-font bg-light">
-                <div className="container">
-                  <nav className="navbar navbar expand-lg navbar light p-0">
-                    <ul>
-                      <li>
-                        <a href="#!">Services</a>
-                      </li>
-                      <li>
-                        <a href="#!">FAQ</a>
-                      </li>
-                      <li>
-                        <a href="#!">Log In</a>
-                      </li>
-                      <li>
-                        <a href="#!">Sign In</a>
-                      </li>
-                    </ul>
-
-                    <div className="attr-nav ml-auto">
-                      <ul>
-                        <li className="ml-2">
-                          <a href="#!" className="butn appointment">
-                            <i className="far fa-calendar-plus mr-1 align-middle display-28"></i>
-                            <span className="alt-font align-middle d-none d-lg-inline-block">
-                              Book Cleaning
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </header>
+          <Header />
           {/* Banner Start */}
           <section
             className="bg-img cover-background left-overlay pt-10 pb-8 pt-lg-20 pb-lg-14"
